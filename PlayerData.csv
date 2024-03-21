@@ -1,0 +1,4 @@
+---,mJob,mAttackPoint,mArmorPoint,mHPMax,mMPMax,mMoveSpeed,mAttackDistance
+Knight,"Knight","60","30","500","100","600.000000","200.000000"
+Archer,"Archer","80","20","400","200","650.000000","600.000000"
+Magicion,"Magicion","100","10","300","300","550.000000","600.000000"
