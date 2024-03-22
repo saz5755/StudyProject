@@ -6,9 +6,6 @@
 #include "GameFramework/GameModeBase.h"
 #include "CharacterSelectGameMode.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class PROJECTOVERKILL_API ACharacterSelectGameMode : public AGameModeBase
 {
