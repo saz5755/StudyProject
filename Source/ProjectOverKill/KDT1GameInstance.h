@@ -6,9 +6,6 @@
 #include "Engine/GameInstance.h"
 #include "KDT1GameInstance.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class PROJECTOVERKILL_API UKDT1GameInstance : public UGameInstance
 {

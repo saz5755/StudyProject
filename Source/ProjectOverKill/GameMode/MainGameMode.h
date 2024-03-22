@@ -6,9 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "MainGameMode.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class PROJECTOVERKILL_API AMainGameMode : public AGameModeBase
 {
