@@ -4,7 +4,8 @@
 
 #include "../GameInfo.h"
 #include "GameFramework/PlayerState.h"
-#include "KDT1PlayerState.generated.h"
+#include "POKPlayerState.generated.h"
+
 
 UENUM(BlueprintType)
 enum class EPlayerJob : uint8
@@ -16,8 +17,8 @@ enum class EPlayerJob : uint8
 	End
 };
 
-// FTableRowBase êµ¬ì¡°ì²´ë¥¼ ìƒì†ë°›ì•„ì„œ ë§Œë“¤ì–´ì•¼ ë°ì´í„°í…Œì´ë¸”ì—ì„œ ì‚¬ìš©í•  ìˆ˜ ìˆëŠ”
-// êµ¬ì¡°ì²´ê°€ ëœë‹¤.
+// FTableRowBase ±¸Á¶Ã¼¸¦ »ó¼Ó¹Ş¾Æ¼­ ¸¸µé¾î¾ß µ¥ÀÌÅÍÅ×ÀÌºí¿¡¼­ »ç¿ëÇÒ ¼ö ÀÖ´Â
+// ±¸Á¶Ã¼°¡ µÈ´Ù.
 USTRUCT(BlueprintType)
 struct FPlayerData :
 	public FTableRowBase
@@ -48,16 +49,16 @@ public:
 };
 
 UCLASS()
-class PROJECTOVERKILL_API AKDT1PlayerState : public APlayerState
+class PROJECTOVERKILL_API APOKPlayerState : public APlayerState
 {
 	GENERATED_BODY()
-
+	
 public:
-	AKDT1PlayerState();
+	APOKPlayerState();
 
 private:
 	UDataTable* mPlayerDataTable;
-	
+
 public:
 	FString		mName;
 	EPlayerJob	mJob;

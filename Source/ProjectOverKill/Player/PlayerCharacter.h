@@ -29,7 +29,7 @@ protected:
 	// 얻어놓는다.
 	class UPlayerAnimInstance* mAnimInst;
 
-	class AKDT1PlayerState* mState;
+	class APOKPlayerState* mState;
 
 	class AItemWeapon* mWeapon;
 

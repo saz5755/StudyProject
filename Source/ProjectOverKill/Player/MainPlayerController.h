@@ -46,6 +46,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 protected:
+	void OnLookMouse(const FInputActionValue& InputActionValue);
 	void OnMove(const FInputActionValue& InputActionValue);
 	void OnAttack(const FInputActionValue& InputActionValue);
 	void OnJump(const FInputActionValue& InputActionValue);

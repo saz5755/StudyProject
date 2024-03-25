@@ -88,7 +88,15 @@ UMainInputDataConfig::UMainInputDataConfig()
 	}
 	{
 		static ConstructorHelpers::FObjectFinder<UInputAction> Asset
-		{ TEXT("/Script/EnhancedInput.InputAction'/Game/Blueprint/Lobby/Input/IA_Move.IA_Move'") };
+		{ TEXT("/Script/EnhancedInput.InputAction'/Game/Blueprint/Main/Input/IA_LookMouse.IA_LookMouse'") };
+		if (Asset.Succeeded())
+		{
+			LookMouse = Asset.Object;
+		}
+	}
+	{
+		static ConstructorHelpers::FObjectFinder<UInputAction> Asset
+		{ TEXT("/Script/EnhancedInput.InputAction'/Game/Blueprint/Main/Input/IA_Move.IA_Move'") };
 		if (Asset.Succeeded())
 		{
 			Move = Asset.Object;
@@ -139,4 +147,6 @@ UMainInputDataConfig::UMainInputDataConfig()
 			Ghost = Asset.Object;
 		}
 	}
+
+	
 }

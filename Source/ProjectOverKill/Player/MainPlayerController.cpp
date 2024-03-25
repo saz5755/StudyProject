@@ -48,6 +48,7 @@ void AMainPlayerController::SetupInputComponent()
 	ensure(EnhancedInputComponent);
 
 	const UMainInputDataConfig* MainInputDataConfig = GetDefault<UMainInputDataConfig>();
+	EnhancedInputComponent->BindAction(MainInputDataConfig->LookMouse, ETriggerEvent::Triggered, this, &ThisClass::OnLookMouse);
 	EnhancedInputComponent->BindAction(MainInputDataConfig->Move, ETriggerEvent::Triggered, this, &ThisClass::OnMove);
 	EnhancedInputComponent->BindAction(MainInputDataConfig->Attack, ETriggerEvent::Triggered, this, &ThisClass::OnAttack);
 	EnhancedInputComponent->BindAction(MainInputDataConfig->Jump, ETriggerEvent::Triggered, this, &ThisClass::OnJump);
@@ -213,6 +214,13 @@ void AMainPlayerController::Tick(float DeltaTime)
 				mDetectActorArray.RemoveAll([](AActor* Actor) { return true; });
 		}
 	}
+}
+
+void AMainPlayerController::OnLookMouse(const FInputActionValue& InputActionValue)
+{
+	const FVector ActionValue = InputActionValue.Get<FVector>();
+	AddYawInput(ActionValue.X);
+	AddPitchInput(ActionValue.Y);
 }
 
 void AMainPlayerController::OnMove(const FInputActionValue& InputActionValue)

@@ -1,24 +1,24 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "KDT1PlayerState.h"
+#include "Player/POKPlayerState.h"
 #include "MainPlayerController.h"
 #include "../UI/MainViewportWidget.h"
 
-AKDT1PlayerState::AKDT1PlayerState()
+APOKPlayerState::APOKPlayerState()
 {
-	static ConstructorHelpers::FObjectFinder<UDataTable>	
+	static ConstructorHelpers::FObjectFinder<UDataTable>
 		PlayerDataAsset(TEXT("/Script/Engine.DataTable'/Game/Blueprint/Main/DT_PlayerData.DT_PlayerData'"));
 
 	if (PlayerDataAsset.Succeeded())
 		mPlayerDataTable = PlayerDataAsset.Object;
 }
 
-void AKDT1PlayerState::BeginPlay()
+void APOKPlayerState::BeginPlay()
 {
 	Super::BeginPlay();
 
-	FPlayerData* Data = 
+	FPlayerData* Data =
 		mPlayerDataTable->FindRow<FPlayerData>(TEXT("Knight"), TEXT(""));
 
 	if (Data)
@@ -37,7 +37,7 @@ void AKDT1PlayerState::BeginPlay()
 		mExp = 0;
 	}
 
-	AMainPlayerController* Controller = 
+	AMainPlayerController* Controller =
 		GetWorld()->GetFirstPlayerController<AMainPlayerController>();
 
 	Controller->GetMainWidget()->SetHP(mHP, mHPMax);

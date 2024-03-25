@@ -2,7 +2,7 @@
 
 
 #include "MainGameMode.h"
-#include "../Player/KDT1PlayerState.h"
+#include "../Player/POKPlayerState.h"
 #include "../Player/KnightCharacter.h"
 #include "../Player/GunnerCharacter.h"
 #include "../POKGameInstance.h"
@@ -10,7 +10,7 @@
 
 AMainGameMode::AMainGameMode()
 {
-	PlayerStateClass = AKDT1PlayerState::StaticClass();
+	PlayerStateClass = APOKPlayerState::StaticClass();
 	DefaultPawnClass = AKnightCharacter::StaticClass();
 	PlayerControllerClass = AMainPlayerController::StaticClass();
 }

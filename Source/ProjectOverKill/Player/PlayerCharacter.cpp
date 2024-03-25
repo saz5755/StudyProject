@@ -4,7 +4,7 @@
 #include "PlayerCharacter.h"
 #include "PlayerAnimInstance.h"
 #include "../Effect/EffectBase.h"
-#include "KDT1PlayerState.h"
+#include "POKPlayerState.h"
 #include "MainPlayerController.h"
 #include "../UI/MainViewportWidget.h"
 #include "../Item/ItemWeapon.h"
@@ -50,7 +50,7 @@ void APlayerCharacter::BeginPlay()
 	// Character 클래스의 SkeletalMeshComponent가 가지고 있는 AnimInstance 객체를 얻어온다.
 	mAnimInst = Cast<UPlayerAnimInstance>(GetMesh()->GetAnimInstance());
 
-	mState = GetPlayerState<AKDT1PlayerState>();
+	mState = GetPlayerState<APOKPlayerState>();
 
 	mFaceCapture->ShowOnlyActors.Add(this);
 
@@ -134,7 +134,7 @@ void APlayerCharacter::NormalAttack()
 {
 	FCollisionQueryParams	param(NAME_None, false, this);
 
-	AKDT1PlayerState* State = GetPlayerState<AKDT1PlayerState>();
+	APOKPlayerState* State = GetPlayerState<APOKPlayerState>();
 
 	FVector	StartLocation = GetActorLocation();
 

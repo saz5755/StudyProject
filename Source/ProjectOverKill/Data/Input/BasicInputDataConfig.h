@@ -58,6 +58,7 @@ public:
 	UInputMappingContext* DefaultContext = nullptr;
 
 public:
+	UInputAction* LookMouse = nullptr;
 	UInputAction* Move = nullptr;
 	UInputAction* Attack = nullptr;
 	UInputAction* Jump = nullptr;
