@@ -62,6 +62,7 @@ public:
 	UInputAction* Move = nullptr;
 	UInputAction* Attack = nullptr;
 	UInputAction* Jump = nullptr;
+	UInputAction* Skill0 = nullptr;
 	UInputAction* Skill1 = nullptr;
 	UInputAction* Detect = nullptr;
 	UInputAction* Ghost = nullptr;

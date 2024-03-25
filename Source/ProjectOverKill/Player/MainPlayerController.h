@@ -50,7 +50,10 @@ protected:
 	void OnMove(const FInputActionValue& InputActionValue);
 	void OnAttack(const FInputActionValue& InputActionValue);
 	void OnJump(const FInputActionValue& InputActionValue);
-	void OnSkill1(const FInputActionValue& InputActionValue);
 	void OnDetect(const FInputActionValue& InputActionValue);
 	void OnGhost(const FInputActionValue& InputActionValue);
+
+protected:
+	void OnSkill0(const FInputActionValue& InputActionValue);
+	void OnSkill1(const FInputActionValue& InputActionValue);
 };

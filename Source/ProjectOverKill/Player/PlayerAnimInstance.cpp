@@ -9,6 +9,7 @@ UPlayerAnimInstance::UPlayerAnimInstance()
 {
 	mAttackIndex = 0;
 	mAttackEnable = true;
+	mSkillEnable = true;
 	mCanJump = true;
 
 	mAnimType = EPlayerAnimType::Default;
@@ -58,6 +59,7 @@ void UPlayerAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 			{
 				mAttackEnable = true;
 			}
+
 		}
 
 		// 이 애님인스턴스를 가지고 있는 캐릭터로부터 해당 캐릭터를 컨트롤 하고 있는 플레이어
@@ -181,9 +183,18 @@ void UPlayerAnimInstance::AnimNotify_JumpRecoveryEnd()
 	mAdditiveAlpha = 0.f;
 }
 
+void UPlayerAnimInstance::AnimNotify_SkillEnable()
+{
+	mAttackEnable = true;
+	mSkillEnable = true;
+}
+
 void UPlayerAnimInstance::AnimNotify_SkillEnd()
 {
 	mAnimType = EPlayerAnimType::Default;
+
+	mAttackEnable = true;
+	mSkillEnable = true;
 
 	// 공격 인덱스를 0으로 초기화한다.
 	mAttackIndex = 0;

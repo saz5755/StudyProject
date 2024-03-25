@@ -38,6 +38,7 @@ protected:
 
 	// 현재 공격가능한 상황인지를 판단하는 변수이다.
 	bool	mAttackEnable;
+	bool	mSkillEnable;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	EPlayerAnimType	mAnimType;
@@ -92,6 +93,9 @@ public:
 	UFUNCTION()
 	void AnimNotify_JumpRecoveryEnd();
 
+	UFUNCTION()
+	void AnimNotify_SkillEnable();	
+	
 	UFUNCTION()
 	void AnimNotify_SkillEnd();
 
