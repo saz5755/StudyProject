@@ -9,7 +9,7 @@
 #include "../UI/MainViewportWidget.h"
 #include "../Item/ItemWeapon.h"
 #include "../Effect/Ghost.h"
-#include "../KDT1PhysicalMaterial.h"
+#include "../Material/PhysicalMaterial/POKPhysicalMaterialBase.h"
 #include "NiagaraActor.h"
 
 // Sets default values
@@ -309,7 +309,7 @@ void APlayerCharacter::OnStep(bool Left)
 
 	if (IsCollision)
 	{
-		UKDT1PhysicalMaterial* Phys = Cast<UKDT1PhysicalMaterial>(result.PhysMaterial);
+		UPOKPhysicalMaterialBase* Phys = Cast<UPOKPhysicalMaterialBase>(result.PhysMaterial);
 
 		if (IsValid(Phys))
 		{
@@ -334,6 +334,8 @@ void APlayerCharacter::OnStep(bool Left)
 				UGameplayStatics::PlaySoundAtLocation(this,
 					Phys->GetSound(), result.ImpactPoint,
 					10.f);
+
+				// 배경음 처리
 				/*UGameplayStatics::PlaySound2D(this, Phys->GetSound(),
 					10.f);*/
 			}
