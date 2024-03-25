@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "GameInfo.h"
+#include "../GameInfo.h"
 #include "Engine/GameInstance.h"
 #include "POKGameInstance.generated.h"
 

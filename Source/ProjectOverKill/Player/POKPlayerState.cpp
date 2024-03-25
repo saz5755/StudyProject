@@ -4,6 +4,7 @@
 #include "Player/POKPlayerState.h"
 #include "MainPlayerController.h"
 #include "../UI/MainViewportWidget.h"
+#include "../Subsystem/DataSubsystem.h"
 
 APOKPlayerState::APOKPlayerState()
 {

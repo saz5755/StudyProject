@@ -3,7 +3,7 @@
 UDataSubsystem::UDataSubsystem()
 {
 	{
-		static ConstructorHelpers::FObjectFinder<UDataTable> Asset(TEXT("/Script/Engine.DataTable'/Game/Blueprint/Tank/DT_Projectile.DT_Projectile'"));
+		static ConstructorHelpers::FObjectFinder<UDataTable> Asset(TEXT("/Script/Engine.DataTable'/Game/Blueprint/Main/DT_PlayerData.DT_PlayerData'"));
 		ensure(Asset.Object);
 		ProjectileDataTable = Asset.Object;
 	}

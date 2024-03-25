@@ -5,9 +5,7 @@
 #include "PlayerCharacter.h"
 #include "KnightCharacter.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class PROJECTOVERKILL_API AKnightCharacter : public APlayerCharacter
 {

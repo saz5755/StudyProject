@@ -5,7 +5,7 @@
 #include "../Player/POKPlayerState.h"
 #include "../Player/KnightCharacter.h"
 #include "../Player/GunnerCharacter.h"
-#include "../POKGameInstance.h"
+#include "../GameInstance/POKGameInstance.h"
 #include "../Player/MainPlayerController.h"
 
 AMainGameMode::AMainGameMode()
@@ -59,6 +59,7 @@ APlayerController* AMainGameMode::Login(UPlayer* NewPlayer, ENetRole InRemoteRol
 			DefaultPawnClass = AGunnerCharacter::StaticClass();
 			break;
 		}
+
 	}
 
 	FString	InputName;

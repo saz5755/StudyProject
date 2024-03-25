@@ -7,7 +7,7 @@
 #include "../Data/Input/BasicInputDataConfig.h"
 #include "SelectPlayer.h"
 #include "../UI/SelectWidget.h"
-#include "../POKGameInstance.h"
+#include "../GameInstance/POKGameInstance.h"
 
 ACharacterSelectPlayerController::ACharacterSelectPlayerController()
 {
