@@ -5,13 +5,14 @@
 #include "../Player/POKPlayerState.h"
 #include "../Character/KnightCharacter.h"
 #include "../Character/GunnerCharacter.h"
+#include "../Character/SoulKnightCharacter.h"
 #include "../GameInstance/POKGameInstance.h"
 #include "../Player/MainPlayerController.h"
 
 AMainGameMode::AMainGameMode()
 {
 	PlayerStateClass = APOKPlayerState::StaticClass();
-	DefaultPawnClass = AKnightCharacter::StaticClass();
+	DefaultPawnClass = ASoulKnightCharacter::StaticClass();
 	PlayerControllerClass = AMainPlayerController::StaticClass();
 }
 
@@ -57,9 +58,11 @@ APlayerController* AMainGameMode::Login(UPlayer* NewPlayer, ENetRole InRemoteRol
 			break;
 		case EPlayerType::Gunner:
 			DefaultPawnClass = AGunnerCharacter::StaticClass();
+			break;	
+		case EPlayerType::SoulKnight:
+			DefaultPawnClass = ASoulKnightCharacter::StaticClass();
 			break;
 		}
-
 	}
 
 	FString	InputName;

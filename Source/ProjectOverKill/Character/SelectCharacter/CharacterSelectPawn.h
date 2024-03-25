@@ -20,7 +20,7 @@ protected:
 	USceneComponent* mRoot;
 
 #if WITH_EDITORONLY_DATA
-	UArrowComponent* mArror;
+	UArrowComponent* mArrorw;
 #endif
 
 protected:

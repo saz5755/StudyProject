@@ -33,7 +33,8 @@ UENUM(BlueprintType)
 enum class EPlayerType : uint8
 {
 	Knight,
-	Gunner
+	Gunner,
+	SoulKnight
 };
 
 

@@ -13,9 +13,9 @@ ACharacterSelectPawn::ACharacterSelectPawn()
 
 #if WITH_EDITORONLY_DATA
 
-	mArror = CreateDefaultSubobject<UArrowComponent>(TEXT("Arror"));
+	mArrorw = CreateDefaultSubobject<UArrowComponent>(TEXT("mArrorw"));
 
-	mArror->SetupAttachment(mRoot);
+	mArrorw->SetupAttachment(mRoot);
 
 #endif
 

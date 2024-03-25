@@ -17,9 +17,6 @@ enum class EPlayerAnimType : uint8
 	Skill
 };
 
-/**
- * 
- */
 UCLASS()
 class PROJECTOVERKILL_API UPlayerAnimInstance : public UAnimInstance
 {
