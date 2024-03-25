@@ -6,9 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "MainPlayerController.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class PROJECTOVERKILL_API AMainPlayerController : public APlayerController
 {

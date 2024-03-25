@@ -4,13 +4,13 @@
 
 #include "GameInfo.h"
 #include "Engine/GameInstance.h"
-#include "KDT1GameInstance.generated.h"
+#include "POKGameInstance.generated.h"
 
 UCLASS()
-class PROJECTOVERKILL_API UKDT1GameInstance : public UGameInstance
+class PROJECTOVERKILL_API UPOKGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
-	
+
 private:
 	EPlayerType	mSelectPlayerType;
 
@@ -24,4 +24,5 @@ public:
 	{
 		return mSelectPlayerType;
 	}
+	
 };

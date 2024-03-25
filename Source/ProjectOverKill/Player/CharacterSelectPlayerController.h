@@ -6,9 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "CharacterSelectPlayerController.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class PROJECTOVERKILL_API ACharacterSelectPlayerController : public APlayerController
 {

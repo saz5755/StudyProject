@@ -5,7 +5,7 @@
 #include "../Player/KDT1PlayerState.h"
 #include "../Player/KnightCharacter.h"
 #include "../Player/GunnerCharacter.h"
-#include "../KDT1GameInstance.h"
+#include "../POKGameInstance.h"
 #include "../Player/MainPlayerController.h"
 
 AMainGameMode::AMainGameMode()

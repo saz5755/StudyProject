@@ -7,7 +7,7 @@
 #include "../Data/Input/BasicInputDataConfig.h"
 #include "SelectPlayer.h"
 #include "../UI/SelectWidget.h"
-#include "../KDT1GameInstance.h"
+#include "../POKGameInstance.h"
 
 ACharacterSelectPlayerController::ACharacterSelectPlayerController()
 {
@@ -103,7 +103,7 @@ void ACharacterSelectPlayerController::OnSelect(
 			mSelectWidget->SetStartButtonEnable(true);
 
 			mSelectPlayerType = SelectPlayer->GetPlayerType();
-			GetWorld()->GetGameInstance<UKDT1GameInstance>()->SetPlayerType(SelectPlayer->GetPlayerType());
+			GetWorld()->GetGameInstance<UPOKGameInstance>()->SetPlayerType(SelectPlayer->GetPlayerType());
 		}
 	}
 

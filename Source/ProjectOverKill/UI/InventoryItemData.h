@@ -6,9 +6,6 @@
 #include "UObject/NoExportTypes.h"
 #include "InventoryItemData.generated.h"
 
-/**
- * 
- */
 UCLASS(BlueprintType)
 class PROJECTOVERKILL_API UInventoryItemData : public UObject
 {
