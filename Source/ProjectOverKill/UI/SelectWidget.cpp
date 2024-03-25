@@ -2,7 +2,7 @@
 
 
 #include "SelectWidget.h"
-#include "../Player/CharacterSelectPlayerController.h"
+#include "../Character/SelectCharacter/CharacterSelectPlayerController.h"
 
 void USelectWidget::NativeConstruct()
 {

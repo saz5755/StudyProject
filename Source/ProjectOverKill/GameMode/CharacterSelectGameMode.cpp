@@ -2,8 +2,8 @@
 
 
 #include "CharacterSelectGameMode.h"
-#include "../Player/CharacterSelectPlayerController.h"
-#include "../Player/CharacterSelectPawn.h"
+#include "../Character/SelectCharacter/CharacterSelectPlayerController.h"
+#include "../Character/SelectCharacter/CharacterSelectPawn.h"
 
 ACharacterSelectGameMode::ACharacterSelectGameMode()
 {

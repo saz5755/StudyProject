@@ -2,10 +2,10 @@
 
 
 #include "PlayerCharacter.h"
-#include "PlayerAnimInstance.h"
+#include "Player/PlayerAnimInstance.h"
 #include "../Effect/EffectBase.h"
-#include "POKPlayerState.h"
-#include "MainPlayerController.h"
+#include "Player/POKPlayerState.h"
+#include "Player/MainPlayerController.h"
 #include "../UI/MainViewportWidget.h"
 #include "../Item/ItemWeapon.h"
 #include "../Effect/Ghost.h"

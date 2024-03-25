@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "../GameInfo.h"
+#include "../../GameInfo.h"
 #include "GameFramework/Pawn.h"
 #include "CharacterSelectPawn.generated.h"
 

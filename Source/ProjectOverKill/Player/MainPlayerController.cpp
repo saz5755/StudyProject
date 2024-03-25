@@ -5,7 +5,7 @@
 #include "Data/Input/BasicInputDataConfig.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
-#include "PlayerCharacter.h"
+#include "../Character/PlayerCharacter.h"
 #include "../UI/MainViewportWidget.h"
 #include "../AI/AIPawn.h"
 

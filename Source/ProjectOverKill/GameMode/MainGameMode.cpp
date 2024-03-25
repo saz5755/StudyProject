@@ -3,8 +3,8 @@
 
 #include "MainGameMode.h"
 #include "../Player/POKPlayerState.h"
-#include "../Player/KnightCharacter.h"
-#include "../Player/GunnerCharacter.h"
+#include "../Character/KnightCharacter.h"
+#include "../Character/GunnerCharacter.h"
 #include "../GameInstance/POKGameInstance.h"
 #include "../Player/MainPlayerController.h"
 

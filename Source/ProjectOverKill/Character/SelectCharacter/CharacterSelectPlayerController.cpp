@@ -4,10 +4,10 @@
 #include "CharacterSelectPlayerController.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
-#include "../Data/Input/BasicInputDataConfig.h"
+#include "../../Data/Input/BasicInputDataConfig.h"
 #include "SelectPlayer.h"
-#include "../UI/SelectWidget.h"
-#include "../GameInstance/POKGameInstance.h"
+#include "../../UI/SelectWidget.h"
+#include "../../GameInstance/POKGameInstance.h"
 
 ACharacterSelectPlayerController::ACharacterSelectPlayerController()
 {

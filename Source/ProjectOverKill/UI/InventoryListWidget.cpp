@@ -5,7 +5,7 @@
 #include "InventoryItemData.h"
 #include "InventoryListItemWidget.h"
 #include "../Item/ItemWeapon.h"
-#include "../Player/PlayerCharacter.h"
+#include "../Character/PlayerCharacter.h"
 
 void UInventoryListWidget::NativeConstruct()
 {

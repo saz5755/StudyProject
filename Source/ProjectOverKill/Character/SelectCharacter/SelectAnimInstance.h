@@ -2,13 +2,11 @@
 
 #pragma once
 
-#include "../GameInfo.h"
+#include "../../GameInfo.h"
 #include "Animation/AnimInstance.h"
 #include "SelectAnimInstance.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class PROJECTOVERKILL_API USelectAnimInstance : public UAnimInstance
 {

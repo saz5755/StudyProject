@@ -2,7 +2,7 @@
 
 
 #include "PlayerAnimInstance.h"
-#include "PlayerCharacter.h"
+#include "../Character/PlayerCharacter.h"
 #include "MainPlayerController.h"
 
 UPlayerAnimInstance::UPlayerAnimInstance()
