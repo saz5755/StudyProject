@@ -165,6 +165,14 @@ UMainInputDataConfig::UMainInputDataConfig()
 			Ghost = Asset.Object;
 		}
 	}
-
+	
+	{
+		static ConstructorHelpers::FObjectFinder<UInputAction> Asset
+		{ TEXT("/Script/EnhancedInput.InputAction'/Game/Blueprint/Main/Input/IA_Interaction.IA_Interaction'") };
+		if (Asset.Succeeded())
+		{
+			Interaction = Asset.Object;
+		}
+	}	
 	
 }

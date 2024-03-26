@@ -2,10 +2,10 @@
 
 
 #include "MainPlayerController.h"
+#include "../Character/PlayerCharacter.h"
 #include "Data/Input/BasicInputDataConfig.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
-#include "../Character/PlayerCharacter.h"
 #include "../UI/MainViewportWidget.h"
 #include "../AI/AIPawn.h"
 
@@ -18,6 +18,11 @@ AMainPlayerController::AMainPlayerController()
 
 	if (MainWidgetClass.Succeeded())
 		mMainWidgetClass = MainWidgetClass.Class;
+
+	InteractionCheckFrequency = 0.5f;
+	InteractionCheckDistance = 225.0f;
+
+	//GetPawn()->BaseEyeHeight = 76.f;
 }
 
 void AMainPlayerController::BeginPlay()
@@ -57,11 +62,20 @@ void AMainPlayerController::SetupInputComponent()
 	EnhancedInputComponent->BindAction(MainInputDataConfig->Skill2, ETriggerEvent::Completed, this, &ThisClass::OnSkill2);
 	EnhancedInputComponent->BindAction(MainInputDataConfig->Detect, ETriggerEvent::Completed, this, &ThisClass::OnDetect);
 	EnhancedInputComponent->BindAction(MainInputDataConfig->Ghost, ETriggerEvent::Completed, this, &ThisClass::OnGhost);
+	
+	EnhancedInputComponent->BindAction(MainInputDataConfig->Interaction, ETriggerEvent::Completed, this, &ThisClass::BeginInteract);
+	//EnhancedInputComponent->BindAction(MainInputDataConfig->Interaction, ETriggerEvent::Completed, this, &ThisClass::EndInteract);
+
 }
 
 void AMainPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (GetWorld()->TimeSince(InteractionData.LastInteractionCheckTime) > InteractionCheckFrequency)
+	{
+		PerformInteractionCheck();
+	}
 
 	if (mDetectEnable)
 	{
@@ -337,5 +351,173 @@ void AMainPlayerController::OnGhost(const FInputActionValue& InputActionValue)
 		PlayerCharacter->OnGhost();
 	}
 }
+
+
+void AMainPlayerController::PerformInteractionCheck()
+{
+
+	InteractionData.LastInteractionCheckTime = GetWorld()->GetTimeSeconds();
+
+	// 연동이 안되어서 Pawn 하나 받은 후 적용
+	FVector TraceStart{ GetPawn()->GetPawnViewLocation() };
+	FVector TraceEnd{ TraceStart + (GetPawn()->GetViewRotation().Vector() * InteractionCheckDistance) };
+
+	float LookDirection = FVector::DotProduct(GetPawn()->GetActorForwardVector(), GetPawn()->GetViewRotation().Vector());
+
+	if (LookDirection > 0)
+	{
+		DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Red, false, 1.0f, 0, .0f);
+
+		FCollisionQueryParams QueryParams;
+		QueryParams.AddIgnoredActor(this);
+		QueryParams.AddIgnoredActor(GetPawn());
+		FHitResult TraceHit;
+
+		if (GetWorld()->LineTraceSingleByChannel(TraceHit, TraceStart, TraceEnd, ECC_Visibility, QueryParams))
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Actor Name: %s"), *TraceHit.GetActor()->GetName());
+			UE_LOG(LogTemp, Warning, TEXT("Actor Location: %s"), *TraceHit.ImpactPoint.ToString());
+			if (TraceHit.GetActor()->GetClass()->ImplementsInterface(UInteractionInterface::StaticClass()))
+				{
+				const float Distance = TraceHit.Distance;
+					//(TraceStart - TraceHit.ImpactPoint).Size();
+			
+				// 박스 오버랩 되었을 때는 전부 진입 Distance와 Draw와 잘 안맞음.
+
+				if (TraceHit.GetActor() != InteractionData.CurrentInteractable && Distance <= InteractionCheckDistance)
+				{
+					UE_LOG(LogTemp, Warning, TEXT(" Begin FoundInteractable "));
+
+					FoundInteractable(TraceHit.GetActor());
+					UE_LOG(LogTemp, Warning, TEXT(" End FoundInteractable "));
+
+					return;
+				}
+
+				if (TraceHit.GetActor() == InteractionData.CurrentInteractable)
+				{
+					return;
+				}
+			}
+		}
+	}
+	NoInteractableFound();
+
+}
+
+void AMainPlayerController::FoundInteractable(AActor* NewInteractable)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Start FoundInteractable"));
+
+	if (IsInteracting())
+	{
+		EndInteract();
+	}
+
+	if (InteractionData.CurrentInteractable)
+	{
+		TargetInteractable = InteractionData.CurrentInteractable;
+		TargetInteractable->EndFocus();
+	}
+	InteractionData.CurrentInteractable = NewInteractable;
+	TargetInteractable = NewInteractable;
+
+	TargetInteractable->BeginFocus();
+
+	UE_LOG(LogTemp, Warning, TEXT("End FoundInteractable"));
+
+}
+
+void AMainPlayerController::NoInteractableFound()
+{
+
+	if (IsInteracting())
+	{
+		GetWorldTimerManager().ClearTimer(TimerHandle_Interaction);
+	}
+
+	// 이 라인은 아이템을 들고 있다면 인벤토리에 다시 집어넣을 때 
+	// 가능하지를 체크할 수 있는 수단이 되기도 하기에 작성.
+	// 및 충돌 발생할 가능성을 조금이나마 차단
+	if (InteractionData.CurrentInteractable)
+	{
+		if (IsValid(TargetInteractable.GetObject()))
+		{
+			TargetInteractable->EndFocus();
+		}
+
+		InteractionData.CurrentInteractable = nullptr;
+		TargetInteractable = nullptr;
+	}
+
+}
+
+void AMainPlayerController::BeginInteract()
+{
+
+	// verify nothing has changed with the interactable state since beginning interaction
+	PerformInteractionCheck();
+	UE_LOG(LogTemp, Warning, TEXT("BeginInteracting"));
+
+	if (InteractionData.CurrentInteractable)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("InteractionData.CurrentInteractable"));
+
+		if (IsValid(TargetInteractable.GetObject()))
+		{
+			UE_LOG(LogTemp, Warning, TEXT("IsValid(TargetInteractable.GetObject())"));
+
+			TargetInteractable->BeginInteract();
+
+			if (FMath::IsNearlyZero(TargetInteractable->InteractableData.InteractionDuration, 0.1f))
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Interact"));
+				Interact();
+			}
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("else Interact"));
+
+				GetWorldTimerManager().SetTimer(TimerHandle_Interaction,
+					this,
+					&AMainPlayerController::Interact,
+					TargetInteractable->InteractableData.InteractionDuration,
+					false);
+			}
+
+		}
+	}
+
+}
+
+void AMainPlayerController::EndInteract()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Start EndInteract"));
+
+	GetWorldTimerManager().ClearTimer(TimerHandle_Interaction);
+
+	if (IsValid(TargetInteractable.GetObject()))
+	{
+		TargetInteractable->EndInteract();
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("End EndInteract"));
+}
+
+void AMainPlayerController::Interact()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Start Interact"));
+
+	GetWorldTimerManager().ClearTimer(TimerHandle_Interaction);
+	if (IsValid(TargetInteractable.GetObject()))
+	{
+		TargetInteractable->Interact();
+	}
+	UE_LOG(LogTemp, Warning, TEXT("End Interact"));
+
+
+}
+
+
 
 

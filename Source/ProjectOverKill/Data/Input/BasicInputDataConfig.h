@@ -67,4 +67,5 @@ public:
 	UInputAction* Skill2 = nullptr;
 	UInputAction* Detect = nullptr;
 	UInputAction* Ghost = nullptr;
+	UInputAction* Interaction = nullptr;
 };
