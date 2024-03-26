@@ -11,6 +11,7 @@
 #include "../Effect/Ghost.h"
 #include "../Material/PhysicalMaterial/POKPhysicalMaterialBase.h"
 #include "NiagaraActor.h"
+#include "DrawDebugHelpers.h"
 
 // Sets default values
 APlayerCharacter::APlayerCharacter()
@@ -40,6 +41,9 @@ APlayerCharacter::APlayerCharacter()
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Player"));
 
 	//SetCanBeDamaged(true);
+
+	InteractionCheckFrequency = 0.1f;
+	InteractionCheckDistance = 225.0f;
 }
 
 // Called when the game starts or when spawned
@@ -77,6 +81,11 @@ void APlayerCharacter::OnConstruction(const FTransform& Transform)
 void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (GetWorld()->TimeSince(InteractionData.LastInteractionCheckTime) > InteractionCheckFrequency)
+	{
+		PerformInteractionCheck();
+	}
 
 }
 
@@ -388,5 +397,60 @@ void APlayerCharacter::GhostTimer()
 		mGhostTimerCount = 10;
 		GetWorldTimerManager().ClearTimer(mGhostTimer);
 	}
+}
+
+void APlayerCharacter::PerformInteractionCheck()
+{
+	InteractionData.LastInteractionCheckTime = GetWorld()->GetTimeSeconds();
+	FVector TraceStart{GetPawnViewLocation()};
+	FVector TraceEnd{ TraceStart + (GetViewRotation().Vector() * InteractionCheckDistance) };
+
+	DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Red, false, 1.0f, 0, 2.0f);
+
+	FCollisionQueryParams QueryParams;
+	QueryParams.AddIgnoredActor(this);
+	FHitResult TraceHit;
+
+	if (GetWorld()->LineTraceSingleByChannel(TraceHit, TraceStart, TraceEnd, ECC_Visibility, QueryParams))
+	{
+		if (TraceHit.GetActor()->GetClass()->ImplementsInterface(UInteractionInterface::StaticClass()))
+		{
+			const float Distance = (TraceStart - TraceHit.ImpactPoint).Size();
+
+			if (TraceHit.GetActor() != InteractionData.CurrentInteractable && Distance <= InteractionCheckDistance)
+			{
+				FoundInteractable(TraceHit.GetActor());
+				return;
+			}
+
+			if (TraceHit.GetActor() == InteractionData.CurrentInteractable)
+			{
+				return;
+			}
+		}
+	}
+	NoInteractableFound();
+
+
+}
+
+void APlayerCharacter::FoundInteractable(AActor* NewInteractable)
+{
+}
+
+void APlayerCharacter::NoInteractableFound()
+{
+}
+
+void APlayerCharacter::BeginInteract()
+{
+}
+
+void APlayerCharacter::EndInteract()
+{
+}
+
+void APlayerCharacter::Interact()
+{
 }
 

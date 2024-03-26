@@ -4,7 +4,26 @@
 
 #include "../GameInfo.h"
 #include "GameFramework/Character.h"
+#include "../Inventory/Interfaces/InteractionInterface.h"
 #include "PlayerCharacter.generated.h"
+
+USTRUCT()
+struct FInteractionData
+{
+	GENERATED_USTRUCT_BODY()
+	
+	FInteractionData() : CurrentInteractable(nullptr), LastInteractionCheckTime(0.0f) 
+	{
+
+	};
+
+	UPROPERTY()
+	AActor* CurrentInteractable;
+
+	UPROPERTY()
+	float LastInteractionCheckTime;
+};
+
 
 UCLASS()
 class PROJECTOVERKILL_API APlayerCharacter : public ACharacter
@@ -79,4 +98,24 @@ public:
 private:
 	UFUNCTION()
 	void GhostTimer();
+
+// Inventory Section
+protected:
+	UPROPERTY(VisibleAnywhere, Category = "Character | Interaction")
+	TScriptInterface<IInteractionInterface> TargetInteractable;
+	
+	float InteractionCheckFrequency;
+	float InteractionCheckDistance;
+
+	FTimerHandle TimerHandle_Interaction;
+
+	FInteractionData InteractionData;
+
+	void PerformInteractionCheck();
+	void FoundInteractable(AActor* NewInteractable);
+	void NoInteractableFound();
+	void BeginInteract();
+	void EndInteract();
+	void Interact();
+
 };
