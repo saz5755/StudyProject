@@ -44,6 +44,8 @@ APlayerCharacter::APlayerCharacter()
 
 	InteractionCheckFrequency = 0.1f;
 	InteractionCheckDistance = 225.0f;
+
+	BaseEyeHeight = 76.f;
 }
 
 // Called when the game starts or when spawned
