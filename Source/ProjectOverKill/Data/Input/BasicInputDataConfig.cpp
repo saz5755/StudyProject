@@ -123,19 +123,28 @@ UMainInputDataConfig::UMainInputDataConfig()
 
 	{
 		static ConstructorHelpers::FObjectFinder<UInputAction> Asset
-		{ TEXT("/Script/EnhancedInput.InputAction'/Game/Blueprint/Main/Input/IA_Skill1.IA_Skill1'") };
+		{ TEXT("/Script/EnhancedInput.InputAction'/Game/Blueprint/Main/Input/IA_Skill0.IA_Skill0'") };
 		if (Asset.Succeeded())
 		{
-			Skill1 = Asset.Object;
+			Skill0 = Asset.Object;
 		}
 	}
 	
 	{
 		static ConstructorHelpers::FObjectFinder<UInputAction> Asset
-		{ TEXT("/Script/EnhancedInput.InputAction'/Game/Blueprint/Main/Input/IA_Skill0.IA_Skill0'") };
+		{ TEXT("/Script/EnhancedInput.InputAction'/Game/Blueprint/Main/Input/IA_Skill1.IA_Skill1'") };
 		if (Asset.Succeeded())
 		{
 			Skill1 = Asset.Object;
+		}
+	}	
+	
+	{
+		static ConstructorHelpers::FObjectFinder<UInputAction> Asset
+		{ TEXT("/Script/EnhancedInput.InputAction'/Game/Blueprint/Main/Input/IA_Skill2.IA_Skill2'") };
+		if (Asset.Succeeded())
+		{
+			Skill2 = Asset.Object;
 		}
 	}
 

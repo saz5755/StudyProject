@@ -54,12 +54,15 @@ void UPlayerAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 				mAttackEnable = false;
 			}
 
-			// 땅을 밟았는데 상태가 Fall 상태일 경우 다 떨어졌다는 것이다.
+			//// 땅을 밟았는데 상태가 Fall 상태일 경우 다 떨어졌다는 것이다.
 			if (mOnGround && mAnimType == EPlayerAnimType::Fall)
 			{
 				mAttackEnable = true;
 			}
-
+			if (mAnimType == EPlayerAnimType::Jump)
+			{
+				mAttackEnable = true;
+			}
 		}
 
 		// 이 애님인스턴스를 가지고 있는 캐릭터로부터 해당 캐릭터를 컨트롤 하고 있는 플레이어
@@ -155,6 +158,8 @@ void UPlayerAnimInstance::AnimNotify_TransitionFall()
 {
 	// 점프가 끝나서 애니메이션 타입을 떨어지는 상태로 전환한다.
 	mAnimType = EPlayerAnimType::Fall;
+	mAttackEnable = true;
+
 }
 
 void UPlayerAnimInstance::AnimNotify_FallEnd()
