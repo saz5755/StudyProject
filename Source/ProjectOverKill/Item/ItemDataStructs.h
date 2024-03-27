@@ -92,11 +92,34 @@ struct FItemAssetData
 };
 
 
-USTRUCT()
+USTRUCT(BlueprintType)
 struct FItemData : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 	
+	UPROPERTY(VisibleAnywhere, Category = "Item")
+	FName ID;
+
+	UPROPERTY(VisibleAnywhere, Category = "Item")
+	int32 Quantity;
+
+	UPROPERTY(EditAnywhere, Category = "Item")
+	EItemType ItemType;
+
+	UPROPERTY(VisibleAnywhere, Category = "Item")
+	EItemQuality ItemQuality;
+
+	UPROPERTY(VisibleAnywhere, Category = "Item")
+	FItemStatistics ItemStatistics;
+
+	UPROPERTY(VisibleAnywhere, Category = "Item")
+	FItemTextData TextData;
+
+	UPROPERTY(VisibleAnywhere, Category = "Item")
+	FItemNumericData NumericData;
+
+	UPROPERTY(VisibleAnywhere, Category = "Item")
+	FItemAssetData AssetData;
 };
 
 UCLASS()
