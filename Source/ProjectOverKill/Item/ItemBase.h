@@ -5,6 +5,7 @@
 #include "../Character/PlayerCharacter.h"
 #include "ItemBase.generated.h"
 
+class UInventoryComponent;
 
 UCLASS()
 class PROJECTOVERKILL_API UItemBase : public UObject
@@ -14,8 +15,8 @@ class PROJECTOVERKILL_API UItemBase : public UObject
 // Public 변수 및 속성 Section
 public:
 
-	/*UPROPERTY()
-	UInventoryComponent* OwningInventory;*/
+	UPROPERTY()
+	UInventoryComponent* OwningInventory;
 
 	// UI에 나타낼 최소값을 1로 설정하면서 0개로 존재하지 않는다면 나타내지 않도록 한다.
 	UPROPERTY(VisibleAnywhere, Category = "Item")
@@ -42,9 +43,14 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Item")
 	FItemAssetData AssetData;
 
+	bool bIsCopy;
+	bool bIsPickup;
+
 // Public Functions Section
 public:
 	UItemBase();
+
+	void ResetItemFlags();
 
 	UFUNCTION(category = "Item")
 	UItemBase* CreateItemCopy() const;
@@ -61,7 +67,6 @@ public:
 	UFUNCTION(category = "Item")
 	void SetQuantity(const int32 NewQuantity);
 
-	// PlayerCharacter 받아오면 될듯?
 	UFUNCTION(category = "Item")
 	virtual void Use(APlayerCharacter* Character);
 

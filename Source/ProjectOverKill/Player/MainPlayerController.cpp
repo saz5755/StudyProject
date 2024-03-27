@@ -1,14 +1,15 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "MainPlayerController.h"
 #include "../Character/PlayerCharacter.h"
+
 #include "Data/Input/BasicInputDataConfig.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+
 #include "../UI/MainViewportWidget.h"
 #include "../AI/AIPawn.h"
+
 #include "../UI/POKHUD.h"
+#include "Components/InventoryComponent.h"
 
 AMainPlayerController::AMainPlayerController()
 {
@@ -24,6 +25,10 @@ AMainPlayerController::AMainPlayerController()
 	InteractionCheckDistance = 225.0f;
 
 	//GetPawn()->BaseEyeHeight = 76.f;
+
+	PlayerInventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("PlayerInventory"));
+	PlayerInventory->SetSlotsCapacity(20);
+	PlayerInventory->SetWeightCapacity(50.0f);
 }
 
 void AMainPlayerController::BeginPlay()
@@ -509,16 +514,20 @@ void AMainPlayerController::EndInteract()
 
 void AMainPlayerController::Interact()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Start Interact"));
-
 	GetWorldTimerManager().ClearTimer(TimerHandle_Interaction);
 	if (IsValid(TargetInteractable.GetObject()))
 	{
 		TargetInteractable->Interact(this);
 	}
-	UE_LOG(LogTemp, Warning, TEXT("End Interact"));
-
-
 }
+
+void AMainPlayerController::UpdateInteractionWidget() const
+{
+	if (IsValid(TargetInteractable.GetObject()))
+	{
+		HUD->UpdateInteractionWidget(&TargetInteractable->InteractableData);
+	}
+}
+
 
 

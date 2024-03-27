@@ -8,6 +8,7 @@
 #include "MainPlayerController.generated.h"
 
 class APOKHUD;
+class UInventoryComponent;
 
 USTRUCT()
 struct FInteractionData
@@ -32,14 +33,18 @@ class PROJECTOVERKILL_API AMainPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
+protected:
+	UPROPERTY()
+	APOKHUD* HUD;
+
 public:
 	AMainPlayerController();
 	
 	FORCEINLINE bool IsInteracting() const { return GetWorldTimerManager().IsTimerActive(TimerHandle_Interaction); };
+	
+	FORCEINLINE UInventoryComponent* GetInventory() const { return PlayerInventory; };
 
-protected:
-	UPROPERTY()
-	APOKHUD* HUD;
+	void UpdateInteractionWidget() const;
 
 private:
 	TSubclassOf<UUserWidget>	mMainWidgetClass;
@@ -87,6 +92,9 @@ protected:
 protected:
 	UPROPERTY(VisibleAnywhere, Category = "Character | Interaction")
 	TScriptInterface<IInteractionInterface> TargetInteractable;
+
+	UPROPERTY(VisibleAnywhere, Category = "Character | Interaction")
+	UInventoryComponent* PlayerInventory;
 
 	float InteractionCheckFrequency;
 	float InteractionCheckDistance;
