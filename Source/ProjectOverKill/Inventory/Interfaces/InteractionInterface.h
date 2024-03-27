@@ -67,7 +67,7 @@ public:
 	virtual void EndFocus();
 	virtual void BeginInteract();
 	virtual void EndInteract();
-	virtual void Interact();
+	virtual void Interact(AMainPlayerController* PlayerController);
 
 	FInteractableData InteractableData;
 };

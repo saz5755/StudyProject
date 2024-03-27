@@ -379,12 +379,8 @@ void AMainPlayerController::PerformInteractionCheck()
 			UE_LOG(LogTemp, Warning, TEXT("Actor Location: %s"), *TraceHit.ImpactPoint.ToString());
 			if (TraceHit.GetActor()->GetClass()->ImplementsInterface(UInteractionInterface::StaticClass()))
 				{
-				const float Distance = TraceHit.Distance;
-					//(TraceStart - TraceHit.ImpactPoint).Size();
-			
-				// 박스 오버랩 되었을 때는 전부 진입 Distance와 Draw와 잘 안맞음.
-
-				if (TraceHit.GetActor() != InteractionData.CurrentInteractable && Distance <= InteractionCheckDistance)
+					//const float Distance = TraceHit.Distance;
+				if (TraceHit.GetActor() != InteractionData.CurrentInteractable /*&& Distance <= InteractionCheckDistance*/)
 				{
 					UE_LOG(LogTemp, Warning, TEXT(" Begin FoundInteractable "));
 
@@ -511,7 +507,7 @@ void AMainPlayerController::Interact()
 	GetWorldTimerManager().ClearTimer(TimerHandle_Interaction);
 	if (IsValid(TargetInteractable.GetObject()))
 	{
-		TargetInteractable->Interact();
+		TargetInteractable->Interact(this);
 	}
 	UE_LOG(LogTemp, Warning, TEXT("End Interact"));
 

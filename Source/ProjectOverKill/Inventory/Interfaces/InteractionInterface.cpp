@@ -29,7 +29,7 @@ void IInteractionInterface::EndInteract()
 
 }
 
-void IInteractionInterface::Interact()
+void IInteractionInterface::Interact(AMainPlayerController* PlayerController)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Interact"));
 
