@@ -8,9 +8,7 @@
 #include "Blueprint/UserWidget.h"
 #include "SelectWidget.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class PROJECTOVERKILL_API USelectWidget : public UUserWidget
 {

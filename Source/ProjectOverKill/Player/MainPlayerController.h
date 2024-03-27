@@ -7,6 +7,8 @@
 #include "../Inventory/Interfaces/InteractionInterface.h"
 #include "MainPlayerController.generated.h"
 
+class APOKHUD;
+
 USTRUCT()
 struct FInteractionData
 {
@@ -35,6 +37,10 @@ public:
 	
 	FORCEINLINE bool IsInteracting() const { return GetWorldTimerManager().IsTimerActive(TimerHandle_Interaction); };
 
+protected:
+	UPROPERTY()
+	APOKHUD* HUD;
+
 private:
 	TSubclassOf<UUserWidget>	mMainWidgetClass;
 	class UMainViewportWidget* mMainWidget;
@@ -58,8 +64,6 @@ public:
 		return mMoveDir;
 	}
 
-
-
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
@@ -74,9 +78,7 @@ protected:
 	void OnJump(const FInputActionValue& InputActionValue);
 	void OnDetect(const FInputActionValue& InputActionValue);
 	void OnGhost(const FInputActionValue& InputActionValue);
-	//void OnInteract(const FInputActionValue& InputActionValue);
-
-protected:
+	
 	void OnSkill0(const FInputActionValue& InputActionValue);
 	void OnSkill1(const FInputActionValue& InputActionValue);
 	void OnSkill2(const FInputActionValue& InputActionValue);

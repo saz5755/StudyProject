@@ -8,12 +8,14 @@
 #include "../Character/SoulKnightCharacter.h"
 #include "../GameInstance/POKGameInstance.h"
 #include "../Player/MainPlayerController.h"
+#include "../UI/POKHUD.h"
 
 AMainGameMode::AMainGameMode()
 {
 	PlayerStateClass = APOKPlayerState::StaticClass();
 	DefaultPawnClass = ASoulKnightCharacter::StaticClass();
 	PlayerControllerClass = AMainPlayerController::StaticClass();
+	HUDClass = APOKHUD::StaticClass();
 }
 
 void AMainGameMode::InitGame(const FString& MapName, const FString& Options, 

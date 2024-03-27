@@ -8,6 +8,7 @@
 #include "EnhancedInputComponent.h"
 #include "../UI/MainViewportWidget.h"
 #include "../AI/AIPawn.h"
+#include "../UI/POKHUD.h"
 
 AMainPlayerController::AMainPlayerController()
 {
@@ -15,7 +16,7 @@ AMainPlayerController::AMainPlayerController()
 
 	static ConstructorHelpers::FClassFinder<UUserWidget>
 		MainWidgetClass(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Blueprint/Main/UI/UI_MainViewport.UI_MainViewport_C'"));
-
+	
 	if (MainWidgetClass.Succeeded())
 		mMainWidgetClass = MainWidgetClass.Class;
 
@@ -40,7 +41,9 @@ void AMainPlayerController::BeginPlay()
 
 	// 위젯을 생성한다.
 	mMainWidget = CreateWidget<UMainViewportWidget>(GetWorld(), mMainWidgetClass);
-	mMainWidget->AddToViewport();
+	mMainWidget->AddToViewport(10);
+
+	HUD = Cast<APOKHUD>(GetWorld()->GetFirstPlayerController()->GetHUD());
 }
 
 void AMainPlayerController::SetupInputComponent()
@@ -418,6 +421,8 @@ void AMainPlayerController::FoundInteractable(AActor* NewInteractable)
 	InteractionData.CurrentInteractable = NewInteractable;
 	TargetInteractable = NewInteractable;
 
+	HUD->UpdateInteractionWidget(&TargetInteractable->InteractableData);
+
 	TargetInteractable->BeginFocus();
 
 	UE_LOG(LogTemp, Warning, TEXT("End FoundInteractable"));
@@ -441,6 +446,8 @@ void AMainPlayerController::NoInteractableFound()
 		{
 			TargetInteractable->EndFocus();
 		}
+
+		HUD->HideInteractionWidget();
 
 		InteractionData.CurrentInteractable = nullptr;
 		TargetInteractable = nullptr;
@@ -513,7 +520,5 @@ void AMainPlayerController::Interact()
 
 
 }
-
-
 
 
