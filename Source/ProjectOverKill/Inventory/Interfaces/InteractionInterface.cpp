@@ -1,9 +1,5 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "Inventory/Interfaces/InteractionInterface.h"
-
-// Add default functionality here for any IInteractionInterface functions that are not pure virtual.
+#include "Player/MainPlayerController.h"
 
 void IInteractionInterface::BeginFocus()
 {

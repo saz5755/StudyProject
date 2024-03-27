@@ -6,6 +6,8 @@
 #include "UObject/Interface.h"
 #include "InteractionInterface.generated.h"
 
+class AMainPlayerController;
+
 UENUM()
 enum class EInteractableType : uint8
 {
