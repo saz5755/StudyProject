@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "CharacterSelectPlayerController.generated.h"
 
+struct FInputActionValue;
 
 UCLASS()
 class PROJECTOVERKILL_API ACharacterSelectPlayerController : public APlayerController

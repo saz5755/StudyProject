@@ -9,6 +9,7 @@
 
 class APOKHUD;
 class UInventoryComponent;
+struct FInputActionValue;
 
 USTRUCT()
 struct FInteractionData
@@ -87,6 +88,9 @@ protected:
 	void OnSkill0(const FInputActionValue& InputActionValue);
 	void OnSkill1(const FInputActionValue& InputActionValue);
 	void OnSkill2(const FInputActionValue& InputActionValue);
+
+private:
+	TSubclassOf<UInventoryComponent> PlayerInventory2;
 
 	// Inventory Section
 protected:

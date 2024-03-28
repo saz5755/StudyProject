@@ -2,8 +2,10 @@
 
 #include "../../GameInfo.h"
 #include "GameFramework/Actor.h"
-#include "../../Inventory/Interfaces/InteractionInterface.h"
 #include "Pickup.generated.h"
+
+class UItemBase;
+class AMainPlayerController;
 
 UCLASS()
 class PROJECTOVERKILL_API APickup : public AActor, public IInteractionInterface
