@@ -100,7 +100,7 @@ struct FItemData : public FTableRowBase
 	UPROPERTY(VisibleAnywhere, Category = "Item")
 	FName ID;
 
-	UPROPERTY(VisibleAnywhere, Category = "Item")
+	UPROPERTY(EditAnywhere, Category = "Item")
 	int32 Quantity;
 
 	UPROPERTY(EditAnywhere, Category = "Item")

@@ -139,6 +139,7 @@ FItemAddResult UInventoryComponent::HandleNonStackableItems(UItemBase* InputItem
 	}
 
 	AddNewItem(InputItem, 1);
+
 	return FItemAddResult::AddedAll(1, FText::Format(FText::FromString(
 		"Successfully added {0} to the inventory."), 1, InputItem->TextData.Name));
 }

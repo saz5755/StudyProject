@@ -89,8 +89,6 @@ protected:
 	void OnSkill1(const FInputActionValue& InputActionValue);
 	void OnSkill2(const FInputActionValue& InputActionValue);
 
-private:
-	TSubclassOf<UInventoryComponent> PlayerInventory2;
 
 	// Inventory Section
 protected:
@@ -106,6 +104,10 @@ protected:
 	FTimerHandle TimerHandle_Interaction;
 
 	FInteractionData InteractionData;
+
+	// Function
+
+	void ToggleMenu();
 
 	void PerformInteractionCheck();
 	void FoundInteractable(AActor* NewInteractable);

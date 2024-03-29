@@ -28,34 +28,6 @@ UBasicInputDataConfig::UBasicInputDataConfig()
 	}
 }
 
-UTankInputDataConfig::UTankInputDataConfig()
-{
-	{
-		static ConstructorHelpers::FObjectFinder<UInputMappingContext> Asset
-		{ TEXT("/Script/EnhancedInput.InputMappingContext'/Game/Blueprint/Tank/Input/IMC_Tank.IMC_Tank'") };
-		if (Asset.Succeeded())
-		{
-			DefaultContext = Asset.Object;
-		}
-	}
-	{
-		static ConstructorHelpers::FObjectFinder<UInputAction> Asset
-		{ TEXT("/Script/EnhancedInput.InputAction'/Game/Blueprint/Tank/Input/IA_Attack.IA_Attack'") };
-		if (Asset.Succeeded())
-		{
-			Attack = Asset.Object;
-		}
-	}
-	{
-		static ConstructorHelpers::FObjectFinder<UInputAction> Asset
-		{ TEXT("/Script/EnhancedInput.InputAction'/Game/Blueprint/Tank/Input/IA_Zoom.IA_Zoom'") };
-		if (Asset.Succeeded())
-		{
-			Zoom = Asset.Object;
-		}
-	}
-}
-
 USelectInputDataConfig::USelectInputDataConfig()
 {
 	{
@@ -174,5 +146,14 @@ UMainInputDataConfig::UMainInputDataConfig()
 			Interaction = Asset.Object;
 		}
 	}	
+
+	{
+		static ConstructorHelpers::FObjectFinder<UInputAction> Asset
+		{ TEXT("/Script/EnhancedInput.InputAction'/Game/Blueprint/Main/Input/IA_Toggle.IA_Toggle'") };
+		if (Asset.Succeeded())
+		{
+			ToggleMenu = Asset.Object;
+		}
+	}
 	
 }

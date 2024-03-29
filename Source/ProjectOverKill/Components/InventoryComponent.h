@@ -73,7 +73,6 @@ public:
 
 	FOnInventoryUpdated OnInventoryUpdated;
 
-
 	UInventoryComponent();
 
 	UFUNCTION(Category = "Inventory")

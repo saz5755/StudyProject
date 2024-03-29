@@ -22,20 +22,6 @@ public:
 };
 
 UCLASS()
-class UTankInputDataConfig : public UObject
-{
-	GENERATED_BODY()
-public:
-	UTankInputDataConfig();
-public:
-	UInputMappingContext* DefaultContext = nullptr;
-
-public:
-	UInputAction* Attack = nullptr;
-	UInputAction* Zoom = nullptr;
-};
-
-UCLASS()
 class USelectInputDataConfig : public UObject
 {
 	GENERATED_BODY()
@@ -68,4 +54,5 @@ public:
 	UInputAction* Detect = nullptr;
 	UInputAction* Ghost = nullptr;
 	UInputAction* Interaction = nullptr;
+	UInputAction* ToggleMenu = nullptr;
 };

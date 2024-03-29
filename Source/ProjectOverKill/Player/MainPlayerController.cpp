@@ -74,6 +74,8 @@ void AMainPlayerController::SetupInputComponent()
 	EnhancedInputComponent->BindAction(MainInputDataConfig->Interaction, ETriggerEvent::Completed, this, &ThisClass::BeginInteract);
 	//EnhancedInputComponent->BindAction(MainInputDataConfig->Interaction, ETriggerEvent::Completed, this, &ThisClass::EndInteract);
 
+	EnhancedInputComponent->BindAction(MainInputDataConfig->ToggleMenu, ETriggerEvent::Completed, this, &ThisClass::ToggleMenu);
+
 }
 
 void AMainPlayerController::Tick(float DeltaTime)
@@ -360,7 +362,6 @@ void AMainPlayerController::OnGhost(const FInputActionValue& InputActionValue)
 	}
 }
 
-
 void AMainPlayerController::PerformInteractionCheck()
 {
 
@@ -527,6 +528,11 @@ void AMainPlayerController::UpdateInteractionWidget() const
 	{
 		HUD->UpdateInteractionWidget(&TargetInteractable->InteractableData);
 	}
+}
+
+void AMainPlayerController::ToggleMenu()
+{
+	HUD->ToggleMenu();
 }
 
 
