@@ -117,7 +117,6 @@ void AMainPlayerController::Tick(float DeltaTime)
 			DrawDebugSphere(GetWorld(), Location,
 				1000.f, 20, DrawColor, false,
 				0.35f);
-
 #endif
 
 			if (IsCollision)
@@ -374,7 +373,7 @@ void AMainPlayerController::PerformInteractionCheck()
 
 	if (LookDirection > 0)
 	{
-		DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Red, false, 1.0f, 0, .0f);
+		DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Red, false, 1.0f, 0, 2.0f);
 
 		FCollisionQueryParams QueryParams;
 		QueryParams.AddIgnoredActor(this);

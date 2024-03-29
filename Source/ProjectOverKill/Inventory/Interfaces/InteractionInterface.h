@@ -44,7 +44,7 @@ struct FInteractableData
 	// 현재는 0~255까지만 있어도 충분하기에 int8 사용하였고 
 	// 추후 기호에 따라 int32와 같은 다른 타입으로 변경하기
 	// Used Only for Pickups
-	UPROPERTY(EditInstanceOnly)
+	UPROPERTY(EditAnywhere)
 	int8 Quantity;
 
 	// Used for things like valves, doors, etc. that require an interaction timer

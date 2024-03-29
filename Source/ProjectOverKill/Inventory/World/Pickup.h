@@ -38,10 +38,10 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Pickup | Item Reference")
 	UItemBase* ItemReference;
 
-	UPROPERTY(EditInstanceOnly, Category = "Pickup | Item Initialization")
+	UPROPERTY(EditAnywhere, Category = "Pickup | Item Initialization")
 	int32 ItemQuantity;
 
-	UPROPERTY(VisibleInstanceOnly, Category = "Pickup | Interaction")
+	UPROPERTY(EditAnywhere, Category = "Pickup | Interaction")
 	FInteractableData InstanceInteractableData;
 
 	// Function
