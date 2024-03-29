@@ -1,15 +1,14 @@
 #include "MainPlayerController.h"
 #include "../Character/PlayerCharacter.h"
+#include "../UI/POKHUD.h"
+#include "Inventory/World/Pickup.h"
+#include "../UI/MainViewportWidget.h"
+#include "../AI/AIPawn.h"
+#include "Components/InventoryComponent.h"
 
 #include "Data/Input/BasicInputDataConfig.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
-
-#include "../UI/MainViewportWidget.h"
-#include "../AI/AIPawn.h"
-
-#include "../UI/POKHUD.h"
-#include "Components/InventoryComponent.h"
 
 AMainPlayerController::AMainPlayerController()
 {
@@ -528,6 +527,32 @@ void AMainPlayerController::UpdateInteractionWidget() const
 	{
 		HUD->UpdateInteractionWidget(&TargetInteractable->InteractableData);
 	}
+}
+
+void AMainPlayerController::DropItem(UItemBase* ItemToDrop, const int32 QuantityToDrop)
+{
+	if (PlayerInventory->FindMatchingItem(ItemToDrop))
+	{
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.Owner = this;
+		SpawnParams.bNoFail = true;
+		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+	
+		const FVector MainPlayerControllerSpawnLocation{ GetPawn()->GetActorLocation()+ (GetPawn()->GetActorForwardVector() * 50.0f)};
+
+		const FTransform SpawnTransform(GetPawn()->GetActorRotation(), MainPlayerControllerSpawnLocation);
+
+		const int32 RemovedQuantity = PlayerInventory->RemoveAmountOfItem(ItemToDrop, QuantityToDrop);
+
+		APickup* Pickup = GetWorld()->SpawnActor<APickup>(APickup::StaticClass(), SpawnTransform, SpawnParams);
+		Pickup->InitializeDrop(ItemToDrop, QuantityToDrop);
+	
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Item to drop was somehow null!"));
+	}
+
 }
 
 void AMainPlayerController::ToggleMenu()

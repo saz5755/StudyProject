@@ -15,11 +15,11 @@ class PROJECTOVERKILL_API UInventoryTooltip : public UUserWidget
 	GENERATED_BODY()
 	
 public:
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	UInventoryItemSlot* InventorySlotBeginHovered;
 
 	UPROPERTY()
-	UTextBlock* ItemName;	
+	UTextBlock* ToolTipItemName;
 
 	UPROPERTY()
 	UTextBlock* ItemType;	

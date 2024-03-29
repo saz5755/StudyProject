@@ -26,7 +26,7 @@ public:
 	TSubclassOf<UInventoryItemSlot> IventorySlotClass;
 
 	UPROPERTY()
-	UWrapBox* InventoryPanel;
+	UWrapBox* InventoryWrapBox;
 
 	UPROPERTY()
 	UTextBlock * WeightInfo;

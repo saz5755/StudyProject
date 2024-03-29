@@ -8,7 +8,7 @@ void UInventoryTooltip::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	ItemName = Cast<UTextBlock>(GetWidgetFromName(TEXT("ItemName")));
+	ToolTipItemName = Cast<UTextBlock>(GetWidgetFromName(TEXT("ToolTipItemName")));
 	ItemType = Cast<UTextBlock>(GetWidgetFromName(TEXT("ItemType")));
 	DamageValue = Cast<UTextBlock>(GetWidgetFromName(TEXT("DamageValue")));
 	ArmorRating = Cast<UTextBlock>(GetWidgetFromName(TEXT("ArmorRating")));
@@ -22,6 +22,8 @@ void UInventoryTooltip::NativeConstruct()
 
 	switch (ItemBeingHovered->ItemType)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("Inswitch ItemBeingHovered"));
+
 	case EItemType::Armor:
 		break;
 
@@ -50,19 +52,27 @@ void UInventoryTooltip::NativeConstruct()
 		UsageText->SetVisibility(ESlateVisibility::Collapsed);
 		break;
 
-	default: ;
+	default: 
+		break;
 	}
+	UE_LOG(LogTemp, Warning, TEXT("Begin ItemName->SetText"));
 
-	//ItemName->SetText(ItemBeingHovered->TextData.Name);
-	//DamageValue->SetText(FText::AsNumber(ItemBeingHovered->ItemStatistics.DamageValue));
-	//ArmorRating->SetText(FText::AsNumber(ItemBeingHovered->ItemStatistics.ArmorRating));
-	//UsageText->SetText(ItemBeingHovered->TextData.UsageText);
-	//ItemDescription->SetText(ItemBeingHovered->TextData.Description);
-	////SellValue->SetText(FText::AsNumber(ItemBeingHovered->ItemStatistics.SellValue));
-	//StackWeight->SetText(FText::AsNumber(ItemBeingHovered->GetItemStackWeight()));
+	ToolTipItemName->SetText(ItemBeingHovered->TextData.Name);
+	DamageValue->SetText(FText::AsNumber(ItemBeingHovered->ItemStatistics.DamageValue));
+	ArmorRating->SetText(FText::AsNumber(ItemBeingHovered->ItemStatistics.ArmorRating));
+	UsageText->SetText(ItemBeingHovered->TextData.UsageText);
+	ItemDescription->SetText(ItemBeingHovered->TextData.Description);
+	
+	const FString WeightInfo =
+	{ "Weight" + FString::SanitizeFloat(ItemBeingHovered->GetItemStackWeight()) };
+
+	StackWeight->SetText(FText::AsNumber(ItemBeingHovered->GetItemStackWeight()));
 
 	if (ItemBeingHovered->NumericData.bIsStackable)
 	{
+		const FString StackInfo =
+		{ " Max stack size : " + FString::FromInt(ItemBeingHovered->NumericData.MaxStackSize) }; 
+
 		MaxStackSize->SetText(FText::AsNumber(ItemBeingHovered->NumericData.MaxStackSize));
 	}
 	else

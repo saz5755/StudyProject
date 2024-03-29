@@ -9,6 +9,7 @@
 
 class APOKHUD;
 class UInventoryComponent;
+class UItemBase;
 struct FInputActionValue;
 
 USTRUCT()
@@ -46,6 +47,8 @@ public:
 	FORCEINLINE UInventoryComponent* GetInventory() const { return PlayerInventory; };
 
 	void UpdateInteractionWidget() const;
+
+	void DropItem(UItemBase* ItemToDrop, const int32 QuantityToDrop);
 
 private:
 	TSubclassOf<UUserWidget>	mMainWidgetClass;

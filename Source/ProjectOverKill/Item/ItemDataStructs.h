@@ -106,7 +106,7 @@ struct FItemData : public FTableRowBase
 	UPROPERTY(EditAnywhere, Category = "Item")
 	EItemType ItemType;
 
-	UPROPERTY(VisibleAnywhere, Category = "Item")
+	UPROPERTY(EditAnywhere, Category = "Item")
 	EItemQuality ItemQuality;
 
 	UPROPERTY(VisibleAnywhere, Category = "Item")
