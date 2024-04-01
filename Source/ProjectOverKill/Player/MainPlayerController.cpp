@@ -362,7 +362,6 @@ void AMainPlayerController::OnGhost(const FInputActionValue& InputActionValue)
 
 void AMainPlayerController::PerformInteractionCheck()
 {
-
 	InteractionData.LastInteractionCheckTime = GetWorld()->GetTimeSeconds();
 
 	// 연동이 안되어서 Pawn 하나 받은 후 적용
@@ -382,17 +381,15 @@ void AMainPlayerController::PerformInteractionCheck()
 
 		if (GetWorld()->LineTraceSingleByChannel(TraceHit, TraceStart, TraceEnd, ECC_Visibility, QueryParams))
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Actor Name: %s"), *TraceHit.GetActor()->GetName());
-			UE_LOG(LogTemp, Warning, TEXT("Actor Location: %s"), *TraceHit.ImpactPoint.ToString());
+			/*UE_LOG(LogTemp, Warning, TEXT("Actor Name: %s"), *TraceHit.GetActor()->GetName());
+			UE_LOG(LogTemp, Warning, TEXT("Actor Location: %s"), *TraceHit.ImpactPoint.ToString());*/
+
 			if (TraceHit.GetActor()->GetClass()->ImplementsInterface(UInteractionInterface::StaticClass()))
 				{
 					//const float Distance = TraceHit.Distance;
 				if (TraceHit.GetActor() != InteractionData.CurrentInteractable /*&& Distance <= InteractionCheckDistance*/)
 				{
-					UE_LOG(LogTemp, Warning, TEXT(" Begin FoundInteractable "));
-
 					FoundInteractable(TraceHit.GetActor());
-					UE_LOG(LogTemp, Warning, TEXT(" End FoundInteractable "));
 
 					return;
 				}
@@ -410,8 +407,6 @@ void AMainPlayerController::PerformInteractionCheck()
 
 void AMainPlayerController::FoundInteractable(AActor* NewInteractable)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Start FoundInteractable"));
-
 	if (IsInteracting())
 	{
 		EndInteract();
@@ -428,9 +423,6 @@ void AMainPlayerController::FoundInteractable(AActor* NewInteractable)
 	HUD->UpdateInteractionWidget(&TargetInteractable->InteractableData);
 
 	TargetInteractable->BeginFocus();
-
-	UE_LOG(LogTemp, Warning, TEXT("End FoundInteractable"));
-
 }
 
 void AMainPlayerController::NoInteractableFound()
@@ -464,21 +456,15 @@ void AMainPlayerController::BeginInteract()
 
 	// verify nothing has changed with the interactable state since beginning interaction
 	PerformInteractionCheck();
-	UE_LOG(LogTemp, Warning, TEXT("BeginInteracting"));
 
 	if (InteractionData.CurrentInteractable)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("InteractionData.CurrentInteractable"));
-
 		if (IsValid(TargetInteractable.GetObject()))
 		{
-			UE_LOG(LogTemp, Warning, TEXT("IsValid(TargetInteractable.GetObject())"));
-
 			TargetInteractable->BeginInteract();
 
 			if (FMath::IsNearlyZero(TargetInteractable->InteractableData.InteractionDuration, 0.1f))
 			{
-				UE_LOG(LogTemp, Warning, TEXT("Interact"));
 				Interact();
 			}
 			else

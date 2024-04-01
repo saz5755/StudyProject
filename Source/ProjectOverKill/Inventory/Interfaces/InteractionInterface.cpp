@@ -15,7 +15,7 @@ void IInteractionInterface::EndFocus()
 
 void IInteractionInterface::BeginInteract()
 {
-	UE_LOG(LogTemp, Warning, TEXT("BeginInteract"));
+	UE_LOG(LogTemp, Warning, TEXT("IInteractionInterface::BeginInteract"));
 
 }
 

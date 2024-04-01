@@ -35,7 +35,7 @@ protected:
 	UPROPERTY(EditInstanceOnly, Category = "Pickup | Item Initialization")
 	FName DesiredItemID;
 
-	UPROPERTY(VisibleAnywhere, Category = "Pickup | Item Reference")
+	UPROPERTY(EditAnywhere, Category = "Pickup | Item Reference")
 	UItemBase* ItemReference;
 
 	UPROPERTY(EditAnywhere, Category = "Pickup | Item Initialization")
@@ -43,6 +43,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Pickup | Interaction")
 	FInteractableData InstanceInteractableData;
+
+	//UPROPERTY(EditAnywhere, Category = "Pickup | Interaction")
+	//FItemNumericData NumericDataTest;
 
 	// Function
 	virtual void BeginPlay() override;

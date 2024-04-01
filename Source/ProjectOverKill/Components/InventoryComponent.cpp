@@ -1,6 +1,7 @@
 #include "Components/InventoryComponent.h"
 #include "../Item/ItemBase.h"
 
+
 UInventoryComponent::UInventoryComponent()
 {
 
@@ -155,13 +156,14 @@ int32 UInventoryComponent::HandleStackableItems(UItemBase* ItemIn, int32 Request
 
 	// check if the input itenm already exists in the inventory and is not a full stack
 	UItemBase* ExistingItemStack = FindNextPartialStack(ItemIn);
+	//UItemBase* ExistingItemStack = ItemIn;
 
 	// distribute item stack over existing stacks
 	while (ExistingItemStack)
 	{
 		// calculate how many of the existing item would be needed to make the next full stack
 		const int32 AmountToMakeFullStack = CalculateNumberForFullStack(ExistingItemStack, AmountToDistribute);
-		
+
 		//  calculate how many of the AmountToMakeFullStack can actually be carried based on weight capacity
 		const int32 WeightLimitAddAmount = CalculateWeightAddAmount(ExistingItemStack, AmountToMakeFullStack);
 
@@ -185,7 +187,7 @@ int32 UInventoryComponent::HandleStackableItems(UItemBase* ItemIn, int32 Request
 				OnInventoryUpdated.Broadcast();
 				return RequestedAddAmount - AmountToDistribute;
 			}
-		}	
+		}
 		else if (WeightLimitAddAmount <= 0)
 		{
 			// this block wil be reached if distributing an item across multiple stacks
@@ -207,7 +209,7 @@ int32 UInventoryComponent::HandleStackableItems(UItemBase* ItemIn, int32 Request
 
 		// check if there is still another valid partial stack of the input item
 		ExistingItemStack = FindNextPartialStack(ItemIn);
-
+	}
 		// no more partial stacks found, check if a new stack can be added.
 		if (InventoryContents.Num() + 1 <= InventorySlotsCapacity)
 		{
@@ -236,7 +238,6 @@ int32 UInventoryComponent::HandleStackableItems(UItemBase* ItemIn, int32 Request
 
 		OnInventoryUpdated.Broadcast();
 		return RequestedAddAmount - AmountToDistribute;
-	}
 	return 0;
 }
 

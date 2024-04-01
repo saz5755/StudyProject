@@ -50,10 +50,13 @@ void UInventoryItemSlot::NativeConstruct()
 
         if (ItemReference->NumericData.bIsStackable)
         {
+            UE_LOG(LogTemp, Warning, TEXT("ItemReference->NumericData.bIsStackable ======================="));
             ItemQuantity->SetText(FText::AsNumber(ItemReference->Quantity));
         }
         else
         {
+            UE_LOG(LogTemp, Warning, TEXT("Not ===========ItemReference->NumericData.bIsStackable"));
+
             ItemQuantity->SetVisibility(ESlateVisibility::Collapsed);
         }
     }
@@ -93,6 +96,8 @@ void UInventoryItemSlot::NativeOnDragDetected(const FGeometry& InGeometry, const
         ItemReference->NumericData.bIsStackable
             ? DragVisual->ItemQuantity->SetText(FText::AsNumber(ItemReference->Quantity))
             : DragVisual->ItemQuantity->SetVisibility(ESlateVisibility::Collapsed);
+
+        DragVisual->ItemQuantity->SetText(FText::AsNumber(ItemReference->Quantity));
 
         UItemDragDropOperation* DragItemOperation = NewObject<UItemDragDropOperation>();
         DragItemOperation->SourceItem = ItemReference;

@@ -63,7 +63,7 @@ struct FItemTextData
 	FText UsageText;
 };
 
-USTRUCT()
+USTRUCT(BlueprintType)
 struct FItemNumericData
 {
 	GENERATED_USTRUCT_BODY()
