@@ -180,9 +180,8 @@ int32 UInventoryComponent::HandleStackableItems(UItemBase* ItemIn, int32 Request
 
 			ItemIn->SetQuantity(AmountToDistribute);
 
-			// TODO: Refine this logic since going over weight capacity should notr ever be possble
-			// if max weight capacity is reached, no need to run the loop again
-			if (InventoryTotalWeight >= InventoryWeightCapacity)
+			// if max weight capacity would be exceeded by another item, just return early
+			if (InventoryTotalWeight + ExistingItemStack->GetItemSingleWeight() > InventoryWeightCapacity)
 			{
 				OnInventoryUpdated.Broadcast();
 				return RequestedAddAmount - AmountToDistribute;
@@ -234,10 +233,10 @@ int32 UInventoryComponent::HandleStackableItems(UItemBase* ItemIn, int32 Request
 				AddNewItem(ItemIn, AmountToDistribute);
 				return RequestedAddAmount;
 			}
-		}
 
-		OnInventoryUpdated.Broadcast();
-		return RequestedAddAmount - AmountToDistribute;
+			OnInventoryUpdated.Broadcast();
+			return RequestedAddAmount - AmountToDistribute;
+		}
 	return 0;
 }
 
@@ -301,6 +300,7 @@ void UInventoryComponent::AddNewItem(UItemBase* Item, const int32 AmountToAdd)
 
 	NewItem->OwningInventory = this;
 	NewItem->SetQuantity(AmountToAdd);
+
 	InventoryContents.Add(NewItem);
 	InventoryTotalWeight += NewItem->GetItemStackWeight();
 	OnInventoryUpdated.Broadcast();
