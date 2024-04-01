@@ -50,13 +50,10 @@ void UInventoryItemSlot::NativeConstruct()
 
         if (ItemReference->NumericData.bIsStackable)
         {
-            UE_LOG(LogTemp, Warning, TEXT("ItemReference->NumericData.bIsStackable ======================="));
             ItemQuantity->SetText(FText::AsNumber(ItemReference->Quantity));
         }
         else
         {
-            UE_LOG(LogTemp, Warning, TEXT("Not ===========ItemReference->NumericData.bIsStackable"));
-
             ItemQuantity->SetVisibility(ESlateVisibility::Collapsed);
         }
     }

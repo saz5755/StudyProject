@@ -89,6 +89,9 @@ struct FItemAssetData
 
 	UPROPERTY(EditAnywhere)
 	UStaticMesh* Mesh;
+
+	UPROPERTY(EditAnywhere)
+	USkeletalMesh* SkeletalMesh;
 };
 
 

@@ -34,6 +34,7 @@ protected:
 	class APOKPlayerState* mState;
 
 	class AItemWeapon* mWeapon;
+	class AItemHelmet* mHelmet;
 
 	int32	mStencilValue = 1;
 

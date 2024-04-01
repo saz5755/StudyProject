@@ -3,6 +3,7 @@
 #include "Components/InventoryComponent.h"
 #include "UI/Inventory/InventoryItemSlot.h"
 #include "UI/Inventory/ItemDragDropOperation.h"
+#include "Item//ItemBase.h"
 
 void UInventoryPanel::NativeConstruct()
 {
@@ -47,7 +48,10 @@ void UInventoryPanel::RefreshInventory()
 	if (InventoryReference && IventorySlotClass)
 	{
 		InventoryWrapBox->ClearChildren();
-		
+	
+		APlayerCharacter* PlayerCharacter =
+			Cast<APlayerCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
+
 		for (UItemBase* const& InventoryItem : InventoryReference->GetInventoryContents())
 		{
 			UInventoryItemSlot* ItemSlot = CreateWidget<UInventoryItemSlot>(this, IventorySlotClass);
@@ -55,12 +59,14 @@ void UInventoryPanel::RefreshInventory()
 			ItemSlot->SetItemReference(InventoryItem);
 			
 			InventoryWrapBox->AddChildToWrapBox(ItemSlot);
+
+			PlayerCharacter->SetWeaponMesh(InventoryItem->AssetData.SkeletalMesh);
 		}
+
 		SetInfoText();
 	}
 
 }
-
 
 bool UInventoryPanel::NativeOnDrop(
 	const FGeometry& InGeometry, 

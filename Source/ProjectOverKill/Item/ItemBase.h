@@ -14,7 +14,6 @@ class PROJECTOVERKILL_API UItemBase : public UObject
 	
 // Public 변수 및 속성 Section
 public:
-
 	UPROPERTY()
 	UInventoryComponent* OwningInventory;
 

@@ -1,15 +1,16 @@
 #pragma once
 
-#include "ItemActor.h"
-#include "ItemWeapon.generated.h"
+#include "Item/ItemActor.h"
+#include "ItemHelmet.generated.h"
+
 
 UCLASS()
-class PROJECTOVERKILL_API AItemWeapon : public AItemActor
+class PROJECTOVERKILL_API AItemHelmet : public AItemActor
 {
 	GENERATED_BODY()
 
 public:
-	AItemWeapon();
+	AItemHelmet();
 
 protected:
 	USkeletalMeshComponent* mMesh;
@@ -20,4 +21,5 @@ protected:
 public:
 	void SetMesh(USkeletalMesh* Mesh);
 	void SetMesh(const FString& Path);
+	
 };

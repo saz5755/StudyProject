@@ -7,7 +7,10 @@
 #include "Player/POKPlayerState.h"
 #include "Player/MainPlayerController.h"
 #include "../UI/MainViewportWidget.h"
+
 #include "../Item/ItemWeapon.h"
+#include "../Item/ItemHelmet.h"
+
 #include "../Effect/Ghost.h"
 #include "../Material/PhysicalMaterial/POKPhysicalMaterialBase.h"
 #include "NiagaraActor.h"
@@ -67,7 +70,16 @@ void APlayerCharacter::BeginPlay()
 
 	mWeapon->AttachToComponent(GetMesh(),
 		FAttachmentTransformRules::KeepRelativeTransform,
-		TEXT("WeaponSocket"));
+		TEXT("WeaponSocket_L"));
+	
+	mHelmet = GetWorld()->SpawnActor<AItemHelmet>(
+		FVector::ZeroVector, FRotator::ZeroRotator,
+		param);
+
+	mHelmet->AttachToComponent(GetMesh(),
+		FAttachmentTransformRules::KeepRelativeTransform,
+		TEXT("HelmetSocket"));
+
 }
 
 void APlayerCharacter::OnConstruction(const FTransform& Transform)

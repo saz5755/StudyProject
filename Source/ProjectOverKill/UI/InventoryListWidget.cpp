@@ -23,7 +23,7 @@ void UInventoryListWidget::NativeConstruct()
 		Data->mName = TEXT("Sword");
 		Data->mCount = 2;
 		Data->mItemMesh = LoadObject<USkeletalMesh>(GetWorld(),
-			TEXT("/Script/Engine.SkeletalMesh'/Game/InfinityBladeWeapons/Weapons/Weapon_ForgingHammers/SK_Forging_Mallet_03.SK_Forging_Mallet_03'"));
+			TEXT("/Script/Engine.SkeletalMesh'/Game/InfinityBladeWeapons/Weapons/Blade/Swords/Blade_SwordA/SK_Blade_SwordA.SK_Blade_SwordA'"));
 
 		mInventoryList->AddItem(Data);
 	}
