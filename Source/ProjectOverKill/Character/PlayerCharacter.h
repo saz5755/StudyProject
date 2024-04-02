@@ -67,6 +67,7 @@ public:
 
 public:
 	void SetWeaponMesh(USkeletalMesh* WeaponMesh);
+	void SetHelmetMesh(UStaticMesh* HelmetMesh);
 
 public:
 	void OnCustomDepthStencil(bool Enable);

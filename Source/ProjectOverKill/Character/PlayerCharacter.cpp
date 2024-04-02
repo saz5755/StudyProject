@@ -198,6 +198,11 @@ void APlayerCharacter::SetWeaponMesh(USkeletalMesh* WeaponMesh)
 	mWeapon->SetMesh(WeaponMesh);
 }
 
+void APlayerCharacter::SetHelmetMesh(UStaticMesh* HelmetMesh)
+{
+	mHelmet->SetMesh(HelmetMesh);
+}
+
 void APlayerCharacter::OnCustomDepthStencil(bool Enable)
 {
 	// CustomDepthStencil 버퍼에 값을 쓸지 결정한다.

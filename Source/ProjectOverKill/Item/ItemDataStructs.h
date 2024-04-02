@@ -100,7 +100,7 @@ struct FItemData : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 	
-	UPROPERTY(VisibleAnywhere, Category = "Item")
+	UPROPERTY(EditAnywhere, Category = "Item")
 	FName ID;
 
 	UPROPERTY(EditAnywhere, Category = "Item")

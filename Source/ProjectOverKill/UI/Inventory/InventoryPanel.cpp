@@ -49,8 +49,8 @@ void UInventoryPanel::RefreshInventory()
 	{
 		InventoryWrapBox->ClearChildren();
 	
-		APlayerCharacter* PlayerCharacter =
-			Cast<APlayerCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
+		/*APlayerCharacter* PlayerCharacter =
+			Cast<APlayerCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());*/
 
 		for (UItemBase* const& InventoryItem : InventoryReference->GetInventoryContents())
 		{
@@ -60,7 +60,8 @@ void UInventoryPanel::RefreshInventory()
 			
 			InventoryWrapBox->AddChildToWrapBox(ItemSlot);
 
-			PlayerCharacter->SetWeaponMesh(InventoryItem->AssetData.SkeletalMesh);
+			//PlayerCharacter->SetWeaponMesh(InventoryItem->AssetData.SkeletalMesh);
+			//PlayerCharacter->SetHelmetMesh(InventoryItem->AssetData.Mesh);
 		}
 
 		SetInfoText();

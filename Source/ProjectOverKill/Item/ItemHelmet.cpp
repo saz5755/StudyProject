@@ -2,7 +2,7 @@
 
 AItemHelmet::AItemHelmet()
 {
-	mMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh"));
+	mMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 
 	mMesh->SetupAttachment(mRoot);
 }
@@ -13,16 +13,16 @@ void AItemHelmet::BeginPlay()
 
 }
 
-void AItemHelmet::SetMesh(USkeletalMesh* Mesh)
+void AItemHelmet::SetMesh(UStaticMesh* Mesh)
 {
-	mMesh->SetSkeletalMesh(Mesh);
+	mMesh->SetStaticMesh(Mesh);
 }
 
 void AItemHelmet::SetMesh(const FString& Path)
 {
-	USkeletalMesh* Mesh = LoadObject<USkeletalMesh>(GetWorld(),
+	UStaticMesh* Mesh = LoadObject<UStaticMesh>(GetWorld(),
 		*Path);
 
 	if (Mesh)
-		mMesh->SetSkeletalMesh(Mesh);
+		mMesh->SetStaticMesh(Mesh);
 }

@@ -18,7 +18,7 @@ public:
 	UInventoryComponent* OwningInventory;
 
 	// UI에 나타낼 최소값을 1로 설정하면서 0개로 존재하지 않는다면 나타내지 않도록 한다.
-	UPROPERTY(VisibleAnywhere, Category = "Item")
+	UPROPERTY(EditAnywhere, Category = "Item")
 	FName ID;
 
 	UPROPERTY(EditAnywhere, Category = "Item")
