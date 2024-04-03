@@ -372,14 +372,16 @@ void AMainPlayerController::PerformInteractionCheck()
 
 	if (LookDirection > 0)
 	{
-		DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Red, false, 1.0f, 0, 2.0f);
-
+		
 		FCollisionQueryParams QueryParams;
 		QueryParams.AddIgnoredActor(this);
 		QueryParams.AddIgnoredActor(GetPawn());
 		FHitResult TraceHit;
 
-		if (GetWorld()->LineTraceSingleByChannel(TraceHit, TraceStart, TraceEnd, ECC_Visibility, QueryParams))
+		bool HitDetected = GetWorld()->SweepSingleByChannel(TraceHit, TraceStart, TraceEnd, 
+			FQuat::Identity, ECC_Visibility, FCollisionShape::MakeSphere(100.f), QueryParams);
+
+		if (HitDetected)
 		{
 			/*UE_LOG(LogTemp, Warning, TEXT("Actor Name: %s"), *TraceHit.GetActor()->GetName());
 			UE_LOG(LogTemp, Warning, TEXT("Actor Location: %s"), *TraceHit.ImpactPoint.ToString());*/
@@ -400,6 +402,15 @@ void AMainPlayerController::PerformInteractionCheck()
 				}
 			}
 		}
+#if ENABLE_DRAW_DEBUG
+
+		FVector CapsuleOrigin = TraceStart + (TraceEnd - TraceStart) * 0.5f;
+		float CapsuleHalfHeight = 100.f;
+		FColor DrawColor = HitDetected ? FColor::Green : FColor::Red;
+
+		DrawDebugCapsule(GetWorld(), CapsuleOrigin, CapsuleHalfHeight, 100.f, FRotationMatrix::MakeFromZ(GetPawn()->GetActorForwardVector()).ToQuat(), DrawColor, false, 2.0f);
+
+#endif
 	}
 	NoInteractableFound();
 

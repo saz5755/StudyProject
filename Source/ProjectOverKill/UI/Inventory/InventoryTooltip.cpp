@@ -20,6 +20,12 @@ void UInventoryTooltip::NativeConstruct()
 
 	const UItemBase* ItemBeingHovered = InventorySlotBeginHovered->GetItemReference();
 
+	/*if (ItemBeingHovered == nullptr)
+	{
+		ItemBeingHovered = InventorySlotBeginHovered->GetItemReference();
+	}
+
+
 	switch (ItemBeingHovered->ItemType)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Inswitch ItemBeingHovered"));
@@ -55,6 +61,7 @@ void UInventoryTooltip::NativeConstruct()
 	default: 
 		break;
 	}
+
 	UE_LOG(LogTemp, Warning, TEXT("Begin ItemName->SetText"));
 
 	ToolTipItemName->SetText(ItemBeingHovered->TextData.Name);
@@ -78,5 +85,5 @@ void UInventoryTooltip::NativeConstruct()
 	else
 	{
 		MaxStackSize->SetVisibility(ESlateVisibility::Collapsed);
-	}
+	}*/
 }

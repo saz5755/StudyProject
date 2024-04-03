@@ -195,12 +195,18 @@ void APlayerCharacter::NormalAttack()
 
 void APlayerCharacter::SetWeaponMesh(USkeletalMesh* WeaponMesh)
 {
+	if (mWeapon)
+	{
 	mWeapon->SetMesh(WeaponMesh);
+	}
 }
 
-void APlayerCharacter::SetHelmetMesh(UStaticMesh* HelmetMesh)
+void APlayerCharacter::SetHelmetMesh(USkeletalMesh* HelmetMesh)
 {
+	if (mHelmet)
+	{
 	mHelmet->SetMesh(HelmetMesh);
+	}
 }
 
 void APlayerCharacter::OnCustomDepthStencil(bool Enable)

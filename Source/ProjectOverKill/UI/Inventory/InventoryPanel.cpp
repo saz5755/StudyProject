@@ -3,18 +3,20 @@
 #include "Components/InventoryComponent.h"
 #include "UI/Inventory/InventoryItemSlot.h"
 #include "UI/Inventory/ItemDragDropOperation.h"
-#include "Item//ItemBase.h"
+#include "Item/ItemBase.h"
 
 void UInventoryPanel::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	InventoryWrapBox = Cast<UWrapBox>(GetWidgetFromName(TEXT("InventoryWrapBox")));
+	//InventoryWrapBox = Cast<UWrapBox>(GetWidgetFromName(TEXT("InventoryWrapBox")));
+
+	InventoryListview = Cast<UListView>(GetWidgetFromName(TEXT("InventoryListviewTest")));
 	WeightInfo = Cast<UTextBlock>(GetWidgetFromName(TEXT("WeightInfo")));
 	CapacityInfo = Cast<UTextBlock>(GetWidgetFromName(TEXT("CapacityInfo")));
 
 	PlayerController = Cast<AMainPlayerController>(GetWorld()->GetFirstPlayerController());
-	//PlayerController = Cast<AMainPlayerController>(GetOwningPlayerController());
+	InventoryReference = PlayerController->GetInventory();
 
 	if (PlayerController)
 	{
@@ -25,6 +27,47 @@ void UInventoryPanel::NativeConstruct()
 			SetInfoText();
 		}
 	}
+	SelectItem = nullptr;
+
+	InventoryListview->OnItemDoubleClicked().AddUObject<UInventoryPanel>(
+		this, &UInventoryPanel::ItemDoubleClick);
+}
+
+void UInventoryPanel::ItemDoubleClick(UObject* Obj)
+{
+	UInventoryItemSlot* Data = Cast<UInventoryItemSlot>(Obj);
+	SelectItem = Data->GetItemReference();
+	EItemType Type = SelectItem->ItemType;
+
+
+	APlayerCharacter* PlayerCharacter =
+		Cast<APlayerCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
+
+	// 아이템 타입에 따라 SetMesh 설정하기
+	switch (Type)
+	{
+		case EItemType::Weapon:
+		PlayerCharacter->SetWeaponMesh(SelectItem->AssetData.SkeletalMesh);
+		break;
+		
+		case EItemType::Shield:
+		PlayerCharacter->SetHelmetMesh(SelectItem->AssetData.SkeletalMesh);
+		break;
+	}
+	//PlayerCharacter->SetHelmetMesh(SelectItem->AssetData.Mesh);
+
+	//for (int i = 0; i < InventoryReference->GetInventoryContents().Num(); i++)
+	//{
+	//	if (SelectItem == InventoryReference->GetInventoryContents()[i])
+	//	{
+	//		APlayerCharacter* PlayerCharacter =
+	//			Cast<APlayerCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());
+
+	//		// 아이템 타입에 따라 SetMesh 설정하기
+	//		PlayerCharacter->SetWeaponMesh(InventoryReference->GetInventoryContents()[i]->AssetData.SkeletalMesh);
+	//		SelectItem = nullptr;
+	//	}
+	//}
 }
 
 void UInventoryPanel::SetInfoText() const
@@ -47,21 +90,19 @@ void UInventoryPanel::RefreshInventory()
 {
 	if (InventoryReference && IventorySlotClass)
 	{
-		InventoryWrapBox->ClearChildren();
-	
-		/*APlayerCharacter* PlayerCharacter =
-			Cast<APlayerCharacter>(GetWorld()->GetFirstPlayerController()->GetPawn());*/
+		//InventoryWrapBox->ClearChildren();
+
+		InventoryListview->ClearListItems();
 
 		for (UItemBase* const& InventoryItem : InventoryReference->GetInventoryContents())
 		{
 			UInventoryItemSlot* ItemSlot = CreateWidget<UInventoryItemSlot>(this, IventorySlotClass);
-
-			ItemSlot->SetItemReference(InventoryItem);
 			
-			InventoryWrapBox->AddChildToWrapBox(ItemSlot);
+			ItemSlot->SetItemReference(InventoryItem);
+		
+			//InventoryWrapBox->AddChildToWrapBox(ItemSlot);
 
-			//PlayerCharacter->SetWeaponMesh(InventoryItem->AssetData.SkeletalMesh);
-			//PlayerCharacter->SetHelmetMesh(InventoryItem->AssetData.Mesh);
+			InventoryListview->AddItem(ItemSlot);
 		}
 
 		SetInfoText();

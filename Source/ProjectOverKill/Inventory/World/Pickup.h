@@ -38,11 +38,11 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Pickup | Item Reference")
 	UItemBase* ItemReference;
 
-	UPROPERTY(EditAnywhere, Category = "Pickup | Item Initialization")
-	int32 ItemQuantity;
-
 	UPROPERTY(EditAnywhere, Category = "Pickup | Interaction")
 	FInteractableData InstanceInteractableData;
+
+	UPROPERTY(EditAnywhere, Category = "Pickup | Item Initialization")
+	int32 ItemQuantity;
 
 	//UPROPERTY(EditAnywhere, Category = "Pickup | Interaction")
 	//FItemNumericData NumericDataTest;

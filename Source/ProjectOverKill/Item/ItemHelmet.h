@@ -13,13 +13,13 @@ public:
 	AItemHelmet();
 
 protected:
-	UStaticMeshComponent* mMesh;
+	USkeletalMeshComponent* mMesh;
 
 protected:
 	virtual void BeginPlay() override;
 
 public:
-	void SetMesh(UStaticMesh* Mesh);
+	void SetMesh(USkeletalMesh* Mesh);
 	void SetMesh(const FString& Path);
 	
 };

@@ -4,6 +4,7 @@
 
 #include "Components/TextBlock.h"
 #include "Components/WrapBox.h"
+#include "Components/ListView.h"
 
 #include "Blueprint/UserWidget.h"
 #include "InventoryPanel.generated.h"
@@ -25,8 +26,11 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UInventoryItemSlot> IventorySlotClass;
 
+	//UPROPERTY()
+	//UWrapBox* InventoryWrapBox;
+
 	UPROPERTY()
-	UWrapBox* InventoryWrapBox;
+	UListView* InventoryListview;
 
 	UPROPERTY()
 	UTextBlock * WeightInfo;
@@ -39,6 +43,14 @@ public:
 
 	UPROPERTY()
 	UInventoryComponent* InventoryReference;
+
+	UPROPERTY()
+	UItemBase* SelectItem;
+	
+	UFUNCTION()
+	void ItemDoubleClick(UObject* Obj);
+
+
 
 
 protected:

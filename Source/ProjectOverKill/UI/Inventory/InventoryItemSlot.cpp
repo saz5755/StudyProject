@@ -3,6 +3,11 @@
 #include "UI/Inventory/InventoryTooltip.h"
 #include "UI/Inventory//DragItemVisual.h"
 #include "UI/Inventory/ItemDragDropOperation.h"
+#include "Components/Image.h"
+#include "Components/InventoryComponent.h"
+#include "Player/MainPlayerController.h"
+#include "Inventory/World/Pickup.h"
+
 
 void UInventoryItemSlot::NativeOnInitialized()
 {
@@ -56,7 +61,7 @@ void UInventoryItemSlot::NativeConstruct()
         {
             ItemQuantity->SetVisibility(ESlateVisibility::Collapsed);
         }
-    }
+    } 
 }
 
 FReply UInventoryItemSlot::NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
@@ -68,10 +73,34 @@ FReply UInventoryItemSlot::NativeOnMouseButtonDown(const FGeometry& InGeometry, 
         return Reply.Handled().DetectDrag(TakeWidget(), EKeys::LeftMouseButton);
     }
 
-    // submenu on right click will happen here
-
     return Reply.Unhandled();
 }
+
+//FReply UInventoryItemSlot::NativeOnMouseButtonDoubleClick(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
+//{
+//    FReply Reply = Super::NativeOnMouseButtonDoubleClick(InGeometry, InMouseEvent);
+//
+//    FVector2D ClickedPosition = InGeometry.AbsoluteToLocal(InMouseEvent.GetScreenSpacePosition());
+//    //UWidget* ClickedWidget = InGeometry.FindWidgetAtPosition(ClickedPosition);
+//    //ItemReference->ID 
+//
+//    if (InMouseEvent.GetEffectingButton() == EKeys::LeftMouseButton)
+//    {
+//        // 왼쪽 마우스 버튼을 더블 클릭한 경우 처리
+//        UE_LOG(LogTemp, Warning, TEXT("Left mouse button double clicked!"));
+//        GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Blue, FString::Printf(TEXT("%s"), *InGeometry.ToString()));
+//
+//        //PlayerCharacter->SetHelmetMesh(InventoryItem->AssetData.Mesh);
+//       
+//        // 처리 후 이벤트가 처리되었음을 반환
+//        return Reply.Handled();
+//    }
+//
+//    // 우클릭 등 다른 버튼을 더블 클릭한 경우 다른 처리를 하거나 처리하지 않도록 설정
+//    // 예를 들어, 우클릭을 더블 클릭한 경우 이벤트를 처리하지 않고 다른 곳으로 전파할 수 있습니다.
+//    return Reply.Unhandled();
+//
+//}
 
 void UInventoryItemSlot::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
 {
