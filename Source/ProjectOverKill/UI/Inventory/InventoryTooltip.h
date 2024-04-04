@@ -48,4 +48,7 @@ public:
 protected:
 	virtual void NativeConstruct() override;
 
+public:
+	UFUNCTION(BlueprintCallable)
+	void SetItemToolTip(UObject* ItemData);
 };

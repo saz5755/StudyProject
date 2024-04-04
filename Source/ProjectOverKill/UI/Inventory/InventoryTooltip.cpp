@@ -17,16 +17,20 @@ void UInventoryTooltip::NativeConstruct()
 	MaxStackSize = Cast<UTextBlock>(GetWidgetFromName(TEXT("MaxStackSize")));
 	StackWeight = Cast<UTextBlock>(GetWidgetFromName(TEXT("StackWeight")));
 	ItemDescription = Cast<UTextBlock>(GetWidgetFromName(TEXT("ItemDescription")));
+}
 
-	/*const UItemBase* ItemBeingHovered = InventorySlotBeginHovered->GetItemReference();
+void UInventoryTooltip::SetItemToolTip(UObject* ItemData)
+{
+	const UInventoryItemSlot* ItemBeingHovered = Cast<UInventoryItemSlot>(ItemData);
 
-	if (ItemBeingHovered == nullptr)
+	//const UItemBase* ItemBeingHovered = InventorySlotBeginHovered->GetItemReference();
+
+	/*if (ItemBeingHovered == nullptr)
 	{
 		ItemBeingHovered = InventorySlotBeginHovered->GetItemReference();
-	}
+	}*/
 
-
-	switch (ItemBeingHovered->ItemType)
+	switch (ItemBeingHovered->GetItemReference()->ItemType)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Inswitch ItemBeingHovered"));
 
@@ -58,32 +62,32 @@ void UInventoryTooltip::NativeConstruct()
 		UsageText->SetVisibility(ESlateVisibility::Collapsed);
 		break;
 
-	default: 
+	default:
 		break;
 	}
 
 	UE_LOG(LogTemp, Warning, TEXT("Begin ItemName->SetText"));
 
-	ToolTipItemName->SetText(ItemBeingHovered->TextData.Name);
-	DamageValue->SetText(FText::AsNumber(ItemBeingHovered->ItemStatistics.DamageValue));
-	ArmorRating->SetText(FText::AsNumber(ItemBeingHovered->ItemStatistics.ArmorRating));
-	UsageText->SetText(ItemBeingHovered->TextData.UsageText);
-	ItemDescription->SetText(ItemBeingHovered->TextData.Description);
-	
+	ToolTipItemName->SetText(ItemBeingHovered->GetItemReference()->TextData.Name);
+	DamageValue->SetText(FText::AsNumber(ItemBeingHovered->GetItemReference()->ItemStatistics.DamageValue));
+	ArmorRating->SetText(FText::AsNumber(ItemBeingHovered->GetItemReference()->ItemStatistics.ArmorRating));
+	UsageText->SetText(ItemBeingHovered->GetItemReference()->TextData.UsageText);
+	ItemDescription->SetText(ItemBeingHovered->GetItemReference()->TextData.Description);
+
 	const FString WeightInfo =
-	{ "Weight" + FString::SanitizeFloat(ItemBeingHovered->GetItemStackWeight()) };
+	{ "Weight" + FString::SanitizeFloat(ItemBeingHovered->GetItemReference()->GetItemStackWeight()) };
 
-	StackWeight->SetText(FText::AsNumber(ItemBeingHovered->GetItemStackWeight()));
+	StackWeight->SetText(FText::AsNumber(ItemBeingHovered->GetItemReference()->GetItemStackWeight()));
 
-	if (ItemBeingHovered->NumericData.bIsStackable)
+	if (ItemBeingHovered->GetItemReference()->NumericData.bIsStackable)
 	{
 		const FString StackInfo =
-		{ " Max stack size : " + FString::FromInt(ItemBeingHovered->NumericData.MaxStackSize) }; 
+		{ " Max stack size : " + FString::FromInt(ItemBeingHovered->GetItemReference()->NumericData.MaxStackSize) };
 
-		MaxStackSize->SetText(FText::AsNumber(ItemBeingHovered->NumericData.MaxStackSize));
+		MaxStackSize->SetText(FText::AsNumber(ItemBeingHovered->GetItemReference()->NumericData.MaxStackSize));
 	}
 	else
 	{
 		MaxStackSize->SetVisibility(ESlateVisibility::Collapsed);
-	}*/
+	}
 }

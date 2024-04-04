@@ -17,8 +17,8 @@ void UInventoryItemSlot::SetItem(UObject* ItemData)
     if (Data)
     {
         UInventoryTooltip* ToolTip = CreateWidget<UInventoryTooltip>(this, ToolTipClass);
-        ToolTip->InventorySlotBeginHovered = this;
         SetToolTip(ToolTip);
+        ToolTip->SetItemToolTip(Data);
     }
 
     if (Data)
@@ -94,6 +94,7 @@ void UInventoryItemSlot::NativeOnDragDetected(const FGeometry& InGeometry, const
     if(DragItemVisualClass)
     { 
         const TObjectPtr<UDragItemVisual> DragVisual = CreateWidget<UDragItemVisual>(this, DragItemVisualClass);
+
         DragVisual->ItemIcon->SetBrushFromTexture(ItemReference->AssetData.Icon);
         DragVisual->ItemBorder->SetBrushColor(ItemBorder->GetBrushColor());
         DragVisual->ItemQuantity->SetText(FText::AsNumber(ItemReference->Quantity));
