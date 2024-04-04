@@ -10,6 +10,7 @@
 
 #include "../Item/ItemWeapon.h"
 #include "../Item/ItemHelmet.h"
+#include "../Item/ItemArmor.h"
 
 #include "../Effect/Ghost.h"
 #include "../Material/PhysicalMaterial/POKPhysicalMaterialBase.h"
@@ -79,6 +80,14 @@ void APlayerCharacter::BeginPlay()
 	mHelmet->AttachToComponent(GetMesh(),
 		FAttachmentTransformRules::KeepRelativeTransform,
 		TEXT("HelmetSocket"));
+	
+	mArmor = GetWorld()->SpawnActor<AItemArmor>(
+		FVector::ZeroVector, FRotator::ZeroRotator,
+		param);
+
+	mArmor->AttachToComponent(GetMesh(),
+		FAttachmentTransformRules::KeepRelativeTransform,
+		TEXT("ArmorSocket"));
 
 }
 
@@ -206,6 +215,14 @@ void APlayerCharacter::SetHelmetMesh(USkeletalMesh* HelmetMesh)
 	if (mHelmet)
 	{
 	mHelmet->SetMesh(HelmetMesh);
+	}
+}
+
+void APlayerCharacter::SetArmorMesh(USkeletalMesh* ArmorMesh)
+{
+	if (mArmor)
+	{
+		mArmor->SetMesh(ArmorMesh);
 	}
 }
 
