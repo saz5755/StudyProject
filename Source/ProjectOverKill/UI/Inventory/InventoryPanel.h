@@ -50,9 +50,6 @@ public:
 	UFUNCTION()
 	void ItemDoubleClick(UObject* Obj);
 
-
-
-
 protected:
 	void SetInfoText() const;
 	virtual void NativeConstruct() override;

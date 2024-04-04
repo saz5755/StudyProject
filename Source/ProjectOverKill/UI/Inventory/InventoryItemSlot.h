@@ -52,6 +52,8 @@ protected:
 	UPROPERTY()
 	UInventoryComponent* InventoryReference;	
 	
+	UFUNCTION(BlueprintCallable)
+	void SetItem(UObject* ItemData);
 
 	virtual void NativeOnInitialized() override;
 	virtual void NativeConstruct() override;

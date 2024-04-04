@@ -18,9 +18,9 @@ void UInventoryTooltip::NativeConstruct()
 	StackWeight = Cast<UTextBlock>(GetWidgetFromName(TEXT("StackWeight")));
 	ItemDescription = Cast<UTextBlock>(GetWidgetFromName(TEXT("ItemDescription")));
 
-	const UItemBase* ItemBeingHovered = InventorySlotBeginHovered->GetItemReference();
+	/*const UItemBase* ItemBeingHovered = InventorySlotBeginHovered->GetItemReference();
 
-	/*if (ItemBeingHovered == nullptr)
+	if (ItemBeingHovered == nullptr)
 	{
 		ItemBeingHovered = InventorySlotBeginHovered->GetItemReference();
 	}
