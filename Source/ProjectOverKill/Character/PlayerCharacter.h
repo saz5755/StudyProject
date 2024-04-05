@@ -36,6 +36,7 @@ protected:
 	class AItemWeapon* mWeapon;
 	class AItemHelmet* mHelmet;
 	class AItemArmor* mArmor;
+	class AItemBoots* mBoots;
 
 	int32	mStencilValue = 1;
 
@@ -70,6 +71,7 @@ public:
 	void SetWeaponMesh(USkeletalMesh* WeaponMesh);
 	void SetHelmetMesh(USkeletalMesh* HelmetMesh);
 	void SetArmorMesh(USkeletalMesh* ArmorMesh);
+	void SetBootsMesh(USkeletalMesh* BootsMesh);
 
 public:
 	void OnCustomDepthStencil(bool Enable);

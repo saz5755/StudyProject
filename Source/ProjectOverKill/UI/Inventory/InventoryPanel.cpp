@@ -57,6 +57,10 @@ void UInventoryPanel::ItemDoubleClick(UObject* Obj)
 		case EItemType::Armor:
 		PlayerCharacter->SetArmorMesh(SelectItem->AssetData.SkeletalMesh);
 		break;
+		
+		case EItemType::Boots:
+		PlayerCharacter->SetBootsMesh(SelectItem->AssetData.SkeletalMesh);
+		break;
 	}
 }
 

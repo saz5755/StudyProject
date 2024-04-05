@@ -11,6 +11,7 @@
 #include "../Item/ItemWeapon.h"
 #include "../Item/ItemHelmet.h"
 #include "../Item/ItemArmor.h"
+#include "../Item/ItemBoots.h"
 
 #include "../Effect/Ghost.h"
 #include "../Material/PhysicalMaterial/POKPhysicalMaterialBase.h"
@@ -88,6 +89,14 @@ void APlayerCharacter::BeginPlay()
 	mArmor->AttachToComponent(GetMesh(),
 		FAttachmentTransformRules::KeepRelativeTransform,
 		TEXT("ArmorSocket"));
+	
+	mBoots = GetWorld()->SpawnActor<AItemBoots>(
+		FVector::ZeroVector, FRotator::ZeroRotator,
+		param);
+
+	mBoots->AttachToComponent(GetMesh(),
+		FAttachmentTransformRules::KeepRelativeTransform,
+		TEXT("BootsSocket"));
 
 }
 
@@ -223,6 +232,14 @@ void APlayerCharacter::SetArmorMesh(USkeletalMesh* ArmorMesh)
 	if (mArmor)
 	{
 		mArmor->SetMesh(ArmorMesh);
+	}
+}
+
+void APlayerCharacter::SetBootsMesh(USkeletalMesh* BootsMesh)
+{
+	if (mBoots)
+	{
+		mBoots->SetMesh(BootsMesh);
 	}
 }
 
