@@ -22,6 +22,7 @@ enum class EItemType : uint8
 	Weapon UMETA(DisplayName = "Weapon"),
 	Shield UMETA(DisplayName = "Shield"),
 	Spell UMETA(DisplayName = "Spell"),
+	Boots UMETA(DisplayName = "Boots"),
 	Consumable UMETA(DisplayName = "Consumable"),
 	Quest UMETA(DisplayName = "Quest"),
 	Mundane UMETA(DisplayName = "Mundane"),
