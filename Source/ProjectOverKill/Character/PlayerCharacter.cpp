@@ -44,7 +44,6 @@ APlayerCharacter::APlayerCharacter()
 	mCamera->SetupAttachment(mCameraArm);
 
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Player"));
-
 	//SetCanBeDamaged(true);
 
 }
@@ -215,7 +214,8 @@ void APlayerCharacter::SetWeaponMesh(USkeletalMesh* WeaponMesh)
 {
 	if (mWeapon)
 	{
-	mWeapon->SetMesh(WeaponMesh);
+		mWeapon->SetMesh(WeaponMesh);
+		mAnimType = EPlayerAnimType::AttackMode;
 	}
 }
 

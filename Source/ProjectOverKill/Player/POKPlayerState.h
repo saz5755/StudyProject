@@ -6,6 +6,13 @@
 #include "GameFramework/PlayerState.h"
 #include "POKPlayerState.generated.h"
 
+//UENUM(BlueprintType)
+//enum class ECharacterState : uint8
+//{
+//	ECS_Unequipped UMETA(DisplayName = "Unequipped"),
+//	// ECS_EquippedOneHandedWeapon UMETA(DisplayName = "Equipped One-Handed Weapon"),
+//	ECS_EquippedTwoHandedWeapon UMETA(DisplayName = "Equipped Two-Handed Weapon")
+//};
 
 UENUM(BlueprintType)
 enum class EPlayerJob : uint8

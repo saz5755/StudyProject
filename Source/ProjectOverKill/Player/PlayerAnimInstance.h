@@ -4,6 +4,7 @@
 
 #include "../GameInfo.h"
 #include "Animation/AnimInstance.h"
+#include "../Player/POKPlayerState.h"
 #include "PlayerAnimInstance.generated.h"
 
 // BlueprintType : 블루프린트에서 사용할 수 있는 타입으로 만들어준다.
@@ -12,6 +13,7 @@ enum class EPlayerAnimType : uint8
 {
 	Default,
 	Jump,
+	AttackMode,
 	Fall,
 	Death,
 	Skill

@@ -4,6 +4,7 @@
 
 #include "../GameInfo.h"
 #include "GameFramework/Character.h"
+#include "../Player/PlayerAnimInstance.h"
 #include "PlayerCharacter.generated.h"
 
 
@@ -13,9 +14,7 @@ class PROJECTOVERKILL_API APlayerCharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
-	APlayerCharacter();
-
+	FORCEINLINE EPlayerAnimType GetCharacterState() const { return mAnimType; }
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
@@ -44,11 +43,18 @@ protected:
 	FTimerHandle	mGhostTimer;
 	int32			mGhostTimerCount = 10;
 
+
+private:
+	EPlayerAnimType mAnimType = EPlayerAnimType::Default;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:
+
+	APlayerCharacter();
+
 	virtual void OnConstruction(const FTransform& Transform);
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

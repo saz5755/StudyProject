@@ -37,6 +37,8 @@ void UPlayerAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 			mMoveSpeed = Movement->Velocity.Length();
 			mMoveSpeed /= Movement->MaxWalkSpeed;
 
+			mAnimType = PlayerCharacter->GetCharacterState();
+
 			// 캐릭터가 땅을 밟고 있는지 판단한다.
 			// IsMovingOnGround : 캐릭터가 땅을 밟고 있으면 true,
 			// 아니면 false를 반환한다.
