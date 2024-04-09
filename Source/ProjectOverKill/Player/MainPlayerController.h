@@ -91,6 +91,7 @@ protected:
 	void OnSkill0(const FInputActionValue& InputActionValue);
 	void OnSkill1(const FInputActionValue& InputActionValue);
 	void OnSkill2(const FInputActionValue& InputActionValue);
+	void OnSkill3(const FInputActionValue& InputActionValue);
 
 
 	// Inventory Section

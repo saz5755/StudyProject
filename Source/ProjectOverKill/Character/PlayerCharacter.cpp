@@ -215,7 +215,7 @@ void APlayerCharacter::SetWeaponMesh(USkeletalMesh* WeaponMesh)
 	if (mWeapon)
 	{
 		mWeapon->SetMesh(WeaponMesh);
-		mAnimType = EPlayerAnimType::AttackMode;
+		//mAnimType = EPlayerAnimType::AttackMode;
 	}
 }
 

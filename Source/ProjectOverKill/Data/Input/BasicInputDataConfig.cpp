@@ -119,6 +119,15 @@ UMainInputDataConfig::UMainInputDataConfig()
 			Skill2 = Asset.Object;
 		}
 	}
+	
+	{
+		static ConstructorHelpers::FObjectFinder<UInputAction> Asset
+		{ TEXT("/Script/EnhancedInput.InputAction'/Game/Blueprint/Main/Input/IA_Skill3.IA_Skill3'") };
+		if (Asset.Succeeded())
+		{
+			Skill3 = Asset.Object;
+		}
+	}
 
 	{
 		static ConstructorHelpers::FObjectFinder<UInputAction> Asset

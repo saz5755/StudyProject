@@ -67,6 +67,7 @@ void AMainPlayerController::SetupInputComponent()
 	EnhancedInputComponent->BindAction(MainInputDataConfig->Skill0, ETriggerEvent::Completed, this, &ThisClass::OnSkill0);
 	EnhancedInputComponent->BindAction(MainInputDataConfig->Skill1, ETriggerEvent::Completed, this, &ThisClass::OnSkill1);
 	EnhancedInputComponent->BindAction(MainInputDataConfig->Skill2, ETriggerEvent::Completed, this, &ThisClass::OnSkill2);
+	EnhancedInputComponent->BindAction(MainInputDataConfig->Skill3, ETriggerEvent::Completed, this, &ThisClass::OnSkill3);
 	EnhancedInputComponent->BindAction(MainInputDataConfig->Detect, ETriggerEvent::Completed, this, &ThisClass::OnDetect);
 	EnhancedInputComponent->BindAction(MainInputDataConfig->Ghost, ETriggerEvent::Completed, this, &ThisClass::OnGhost);
 	
@@ -338,6 +339,13 @@ void AMainPlayerController::OnSkill2(const FInputActionValue& InputActionValue)
 	APlayerCharacter* ControlledPawn = GetPawn<APlayerCharacter>();
 
 	ControlledPawn->PlaySkillMontage(2);
+}
+
+void AMainPlayerController::OnSkill3(const FInputActionValue& InputActionValue)
+{
+	APlayerCharacter* ControlledPawn = GetPawn<APlayerCharacter>();
+
+	ControlledPawn->PlaySkillMontage(3);
 }
 
 void AMainPlayerController::OnDetect(const FInputActionValue& InputActionValue)

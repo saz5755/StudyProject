@@ -51,6 +51,7 @@ public:
 	UInputAction* Skill0 = nullptr;
 	UInputAction* Skill1 = nullptr;
 	UInputAction* Skill2 = nullptr;
+	UInputAction* Skill3 = nullptr;
 	UInputAction* Detect = nullptr;
 	UInputAction* Ghost = nullptr;
 	UInputAction* Interaction = nullptr;

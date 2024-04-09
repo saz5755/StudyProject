@@ -12,7 +12,6 @@ UENUM(BlueprintType)
 enum class EPlayerAnimType : uint8
 {
 	Default,
-	AttackMode,
 	Jump,
 	Fall,
 	Death,
