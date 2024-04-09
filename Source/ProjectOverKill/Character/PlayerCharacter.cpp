@@ -181,9 +181,9 @@ void APlayerCharacter::NormalAttack()
 	// 구를 그린다.
 	FColor	DrawColor = IsCollision ? FColor::Red : FColor::Green;
 
-	DrawDebugCapsule(GetWorld(), (StartLocation + EndLocation) / 2.f,
+	/*DrawDebugCapsule(GetWorld(), (StartLocation + EndLocation) / 2.f,
 		State->mAttackDistance / 2.f, 50.f, FRotationMatrix::MakeFromZ(GetActorForwardVector()).ToQuat(),
-		DrawColor, false, 3.f);
+		DrawColor, false, 3.f);*/
 
 #endif
 

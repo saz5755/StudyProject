@@ -41,7 +41,7 @@ void UMonsterAnimInstance::AnimNotify_HitReact(int32 Index)
 {
 	if (!Montage_IsPlaying(mHitReactMontageArray[Index]))
 	{
-		ChangeAnimType(EMonsterAnimType::HitReact);
+		//ChangeAnimType(EMonsterAnimType::HitReact);
 
 		// 재생 시키기 전에 재생 위치를 처음으로 초기화 시켜준다.
 		Montage_SetPosition(mHitReactMontageArray[Index], 0.f);

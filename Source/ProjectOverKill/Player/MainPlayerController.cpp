@@ -416,7 +416,7 @@ void AMainPlayerController::PerformInteractionCheck()
 		float CapsuleHalfHeight = 100.f;
 		FColor DrawColor = HitDetected ? FColor::Green : FColor::Red;
 
-		DrawDebugCapsule(GetWorld(), CapsuleOrigin, CapsuleHalfHeight, 100.f, FRotationMatrix::MakeFromZ(GetPawn()->GetActorForwardVector()).ToQuat(), DrawColor, false, 2.0f);
+		//DrawDebugCapsule(GetWorld(), CapsuleOrigin, CapsuleHalfHeight, 100.f, FRotationMatrix::MakeFromZ(GetPawn()->GetActorForwardVector()).ToQuat(), DrawColor, false, 2.0f);
 
 #endif
 	}

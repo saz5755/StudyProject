@@ -15,7 +15,7 @@ enum class EMonsterAnimType : uint8
 	Run,
 	Attack,
 	Death,
-	HitReact
+	//HitReact
 };
 
 UCLASS()

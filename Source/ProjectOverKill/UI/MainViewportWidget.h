@@ -25,19 +25,6 @@ protected:
 	UPROPERTY(meta=(BindWidget))
 	class UPlayerHUDWidget* UI_PlayerHUD;
 
-	UButton* mInventoryButton;
-
-	UCheckBox* mCheckBox;
-	USlider* mSlider;
-	UComboBoxString* mComboBox;
-	USpinBox* mSpinBox;
-	UEditableTextBox* mEditTextBox;
-
-	//UPROPERTY(meta=(BindWidgetAnim), Transient)
-	//UWidgetAnimation* ButtonScale;
-
-	UWidgetAnimation* mButtonScale;
-
 protected:
 	virtual void NativeConstruct();
 
@@ -46,32 +33,5 @@ public:
 	void SetHP(int32 HP, int32 HPMax);
 	void SetMP(int32 MP, int32 MPMax);
 
-protected:
-	UFUNCTION()
-	void InventoryButtonClick();
 
-	UFUNCTION()
-	void InventoryButtonHovered();
-
-	UFUNCTION()
-	void InventoryButtonUnHovered();
-
-	UFUNCTION()
-	void CheckStateTest(bool IsChecked);
-
-	UFUNCTION()
-	void ChangeSliderValue(float Value);
-
-	UFUNCTION()
-	void ComboBoxSelectionChange(FString Option,
-		ESelectInfo::Type Type);
-
-	UFUNCTION()
-	void TextChanged(const FText& Text);
-
-	UFUNCTION()
-	void TextCommit(const FText& Text, ETextCommit::Type Type);
-
-private:
-	void BindAnimation();
 };

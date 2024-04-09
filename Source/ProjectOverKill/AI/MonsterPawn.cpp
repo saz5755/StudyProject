@@ -174,7 +174,7 @@ void AMonsterPawn::NormalAttack()
 
 void AMonsterPawn::GetHit(const FVector& ImpactPoint, AActor* Hitter)
 {
-	mAnimInst->ChangeAnimType(EMonsterAnimType::HitReact);
+	//mAnimInst->ChangeAnimType(EMonsterAnimType::HitReact);
 
 	if (mAnimInst)
 	{
@@ -192,27 +192,27 @@ void AMonsterPawn::GetHit(const FVector& ImpactPoint, AActor* Hitter)
 			Theta *= -1.f;
 		}
 
-		//From Back
-		mAnimInst->AnimNotify_HitReact(1);
+		////From Back
+		//mAnimInst->AnimNotify_HitReact(1);
 
-		if (Theta >= -45.f && Theta < 45.f)
-		{
-			// FromFront
-			mAnimInst->AnimNotify_HitReact(0);
-		}
-		else if (Theta >= -135.f && Theta < -45.f)
-		{
-			// FromLeft
-			mAnimInst->AnimNotify_HitReact(2);
-		}
-		else if (Theta >= 45.f && Theta < 135.f)
-		{
-			// FromRight
-			mAnimInst->AnimNotify_HitReact(3);
-		}
+		//if (Theta >= -45.f && Theta < 45.f)
+		//{
+		//	// FromFront
+		//	mAnimInst->AnimNotify_HitReact(0);
+		//}
+		//else if (Theta >= -135.f && Theta < -45.f)
+		//{
+		//	// FromLeft
+		//	mAnimInst->AnimNotify_HitReact(2);
+		//}
+		//else if (Theta >= 45.f && Theta < 135.f)
+		//{
+		//	// FromRight
+		//	mAnimInst->AnimNotify_HitReact(3);
+		//}
 
-		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red,
-			FString::Printf(TEXT("Theta %f"), Theta));
+		//GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red,
+		//	FString::Printf(TEXT("Theta %f"), Theta));
 	}
 }
 
