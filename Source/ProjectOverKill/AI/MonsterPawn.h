@@ -3,6 +3,7 @@
 #pragma once
 
 #include "AIPawn.h"
+#include "../Interfaces/HitInterface.h"
 #include "MonsterPawn.generated.h"
 
 struct FMonsterInfo	:
@@ -48,7 +49,7 @@ public:
 
 
 UCLASS()
-class PROJECTOVERKILL_API AMonsterPawn : public AAIPawn
+class PROJECTOVERKILL_API AMonsterPawn : public AAIPawn, public IHitInterface
 {
 	GENERATED_BODY()
 
@@ -92,6 +93,8 @@ public:
 		class AController* EventInstigator, AActor* DamageCauser);
 
 	virtual void NormalAttack();
+
+	virtual void GetHit(const FVector& ImpactPoint, AActor* Hitter);
 
 public:
 	UFUNCTION()

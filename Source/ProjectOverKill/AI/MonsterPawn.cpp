@@ -4,6 +4,7 @@
 #include "MonsterPawn.h"
 #include "DefaultAIController.h"
 #include "MonsterAnimInstance.h"
+#include "../Interfaces/HitInterface.h"
 #include "MonsterState.h"
 
 UDataTable* AMonsterPawn::mMonsterDataTable = nullptr;
@@ -169,6 +170,50 @@ float AMonsterPawn::TakeDamage(float DamageAmount,
 
 void AMonsterPawn::NormalAttack()
 {
+}
+
+void AMonsterPawn::GetHit(const FVector& ImpactPoint, AActor* Hitter)
+{
+	mAnimInst->ChangeAnimType(EMonsterAnimType::HitReact);
+
+	if (mAnimInst)
+	{
+		const FVector Forward = GetActorForwardVector();
+		const FVector ImpactLowered(ImpactPoint.X, ImpactPoint.Y, GetActorLocation().Z);
+
+		const FVector ToHit = (ImpactLowered - GetActorLocation()).GetSafeNormal();
+		const double CosTheta = FVector::DotProduct(Forward, ToHit);
+		double Theta = FMath::Acos(CosTheta);
+		Theta = FMath::RadiansToDegrees(Theta);
+
+		const FVector CrossProduct = FVector::CrossProduct(Forward, ToHit);
+		if (CrossProduct.Z < 0)
+		{
+			Theta *= -1.f;
+		}
+
+		//From Back
+		mAnimInst->AnimNotify_HitReact(1);
+
+		if (Theta >= -45.f && Theta < 45.f)
+		{
+			// FromFront
+			mAnimInst->AnimNotify_HitReact(0);
+		}
+		else if (Theta >= -135.f && Theta < -45.f)
+		{
+			// FromLeft
+			mAnimInst->AnimNotify_HitReact(2);
+		}
+		else if (Theta >= 45.f && Theta < 135.f)
+		{
+			// FromRight
+			mAnimInst->AnimNotify_HitReact(3);
+		}
+
+		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red,
+			FString::Printf(TEXT("Theta %f"), Theta));
+	}
 }
 
 void AMonsterPawn::BeginOverlap(UPrimitiveComponent* OverlappedComponent,

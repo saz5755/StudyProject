@@ -17,6 +17,7 @@
 #include "../Material/PhysicalMaterial/POKPhysicalMaterialBase.h"
 #include "NiagaraActor.h"
 #include "DrawDebugHelpers.h"
+#include "../Interfaces/HitInterface.h"
 
 // Sets default values
 APlayerCharacter::APlayerCharacter()
@@ -206,6 +207,12 @@ void APlayerCharacter::NormalAttack()
 
 			Effect->SetParticleAsset(TEXT("/Script/Engine.ParticleSystem'/Game/ParagonMinions/FX/Particles/Minions/Minion_melee/FX/Impacts/P_Minion_Impact_Default.P_Minion_Impact_Default'"));
 			Effect->SetSoundAsset(TEXT("/Script/Engine.SoundWave'/Game/ParagonKwang/Characters/Heroes/Kwang/Sounds/SoundWaves/Kwang_Effort_Swing_01.Kwang_Effort_Swing_01'"));
+		
+			IHitInterface* HitInterface = Cast<IHitInterface>(resultArray[i].GetActor());
+			if (HitInterface)
+			{
+				HitInterface->GetHit(resultArray[i].ImpactPoint, resultArray[i].GetActor());
+			}
 		}
 	}
 }

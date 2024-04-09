@@ -14,7 +14,8 @@ enum class EMonsterAnimType : uint8
 	Walk,
 	Run,
 	Attack,
-	Death
+	Death,
+	HitReact
 };
 
 UCLASS()
@@ -25,6 +26,9 @@ class PROJECTOVERKILL_API UMonsterAnimInstance : public UAnimInstance
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	EMonsterAnimType	mAnimType;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<TObjectPtr<UAnimMontage>>	mHitReactMontageArray;
 
 public:
 	void ChangeAnimType(EMonsterAnimType Type)
@@ -45,4 +49,10 @@ public:
 
 	UFUNCTION()
 	void AnimNotify_DeathEnd();
+
+	UFUNCTION()
+	void AnimNotify_HitReact(int32 Index);
+
+	UFUNCTION()
+	void AnimNotify_HitEnd();
 };
