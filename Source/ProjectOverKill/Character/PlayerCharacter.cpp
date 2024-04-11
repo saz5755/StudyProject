@@ -191,7 +191,7 @@ void APlayerCharacter::NormalAttack()
 				GetController(), this);
 
 			// 이펙트 출력 및 사운드 재생.
-			FActorSpawnParameters	SpawnParam;
+			FActorSpawnParameters SpawnParam;
 
 			SpawnParam.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
@@ -200,7 +200,6 @@ void APlayerCharacter::NormalAttack()
 				resultArray[i].ImpactNormal.Rotation(), SpawnParam);
 
 			Effect->SetParticleAsset(TEXT("/Script/Engine.ParticleSystem'/Game/ParagonMinions/FX/Particles/Minions/Minion_melee/FX/Impacts/P_Minion_Impact_Default.P_Minion_Impact_Default'"));
-			Effect->SetSoundAsset(TEXT("/Script/Engine.SoundWave'/Game/ParagonKwang/Characters/Heroes/Kwang/Sounds/SoundWaves/Kwang_Effort_Swing_01.Kwang_Effort_Swing_01'"));
 		
 			IHitInterface* HitInterface = Cast<IHitInterface>(resultArray[i].GetActor());
 			if (HitInterface)

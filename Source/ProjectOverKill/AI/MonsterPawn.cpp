@@ -3,6 +3,7 @@
 #include "MonsterAnimInstance.h"
 #include "../Interfaces/HitInterface.h"
 #include "MonsterState.h"
+#include "Effect/EffectBase.h"
 
 UDataTable* AMonsterPawn::mMonsterDataTable = nullptr;
 
@@ -210,6 +211,18 @@ void AMonsterPawn::GetHit(const FVector& ImpactPoint, AActor* Hitter)
 		//GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red,
 		//	FString::Printf(TEXT("Theta %f"), Theta));
 	}
+
+	FActorSpawnParameters SpawnParam;
+
+	SpawnParam.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+
+	AEffectBase* Effect = GetWorld()->SpawnActor<AEffectBase>(
+		GetActorLocation(),
+		GetActorRotation(), SpawnParam);
+
+	Effect->SetParticleAsset(TEXT("/Script/Engine.ParticleSystem'/Game/ParagonMinions/FX/Particles/Minions/Minion_melee/FX/Impacts/P_Minion_Impact_Default.P_Minion_Impact_Default'"));
+	Effect->SetSoundAsset(TEXT("/Script/MetasoundEngine.MetaSoundSource'/Game/Audio/MetaSounds/sfx_HitMonster.sfx_HitMonster'"));
+
 }
 
 void AMonsterPawn::BeginOverlap(UPrimitiveComponent* OverlappedComponent,
