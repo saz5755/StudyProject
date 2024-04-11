@@ -23,13 +23,6 @@ void UInventoryTooltip::SetItemToolTip(UObject* ItemData)
 {
 	const UInventoryItemSlot* ItemBeingHovered = Cast<UInventoryItemSlot>(ItemData);
 
-	//const UItemBase* ItemBeingHovered = InventorySlotBeginHovered->GetItemReference();
-
-	/*if (ItemBeingHovered == nullptr)
-	{
-		ItemBeingHovered = InventorySlotBeginHovered->GetItemReference();
-	}*/
-
 	switch (ItemBeingHovered->GetItemReference()->ItemType)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Inswitch ItemBeingHovered"));

@@ -26,9 +26,6 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UInventoryItemSlot> IventorySlotClass;
 
-	//UPROPERTY()
-	//UWrapBox* InventoryWrapBox;
-
 	UPROPERTY()
 	UListView* InventoryListview;
 

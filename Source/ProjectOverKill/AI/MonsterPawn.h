@@ -1,13 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "AIPawn.h"
 #include "../Interfaces/HitInterface.h"
 #include "MonsterPawn.generated.h"
 
-struct FMonsterInfo	:
-	public FAIInfo
+struct FMonsterInfo	: public FAIInfo
 {
 	int32		mAttackPoint;
 	int32		mArmorPoint;
@@ -19,8 +16,7 @@ struct FMonsterInfo	:
 };
 
 USTRUCT(BlueprintType)
-struct FMonsterData :
-	public FTableRowBase
+struct FMonsterData : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -56,13 +52,6 @@ class PROJECTOVERKILL_API AMonsterPawn : public AAIPawn, public IHitInterface
 protected:
 	static UDataTable* mMonsterDataTable;
 
-public:
-	static const FMonsterData* FindMonsterData(const FString& Name);
-
-public:
-	AMonsterPawn();
-
-protected:
 	class UMonsterAnimInstance* mAnimInst;
 	FString		mTableRowName;
 	class UMonsterState* mMonsterState;
@@ -78,31 +67,31 @@ protected:
 	float	mHitDuration = 0.3f;
 
 public:
-	virtual void ChangeAIAnimType(uint8 AnimType);
+	AMonsterPawn();
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	static const FMonsterData* FindMonsterData(const FString& Name);
 
-public:
-	virtual void OnConstruction(const FTransform& Transform);
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	void OnDissolve();
 
-	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
-		class AController* EventInstigator, AActor* DamageCauser);
-
-	virtual void NormalAttack();
-
-	virtual void GetHit(const FVector& ImpactPoint, AActor* Hitter);
-
-public:
 	UFUNCTION()
 	void BeginOverlap(UPrimitiveComponent* OverlappedComponent,
 		AActor* OtherActor, UPrimitiveComponent* OtherComp,
 		int32 OtherBodyIndex, bool bFromSweep,
 		const FHitResult& SweepResult);
 
-public:
-	void OnDissolve();
+	virtual void Tick(float DeltaTime) override;
+
+	virtual void ChangeAIAnimType(uint8 AnimType);
+
+	virtual void OnConstruction(const FTransform& Transform);
+
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
+		class AController* EventInstigator, AActor* DamageCauser);
+
+	virtual void NormalAttack();
+	virtual void GetHit(const FVector& ImpactPoint, AActor* Hitter);
+
+protected:
+	virtual void BeginPlay() override;
+	
 };

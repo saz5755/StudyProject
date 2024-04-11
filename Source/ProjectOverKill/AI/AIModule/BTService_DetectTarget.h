@@ -1,14 +1,9 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "../../GameInfo.h"
 #include "BehaviorTree/BTService.h"
 #include "BTService_DetectTarget.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class PROJECTOVERKILL_API UBTService_DetectTarget : public UBTService
 {

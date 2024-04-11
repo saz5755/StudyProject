@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "../GameInfo.h"
@@ -59,12 +57,6 @@ UCLASS()
 class PROJECTOVERKILL_API APOKPlayerState : public APlayerState
 {
 	GENERATED_BODY()
-	
-public:
-	APOKPlayerState();
-
-private:
-	UDataTable* mPlayerDataTable;
 
 public:
 	FString		mName;
@@ -80,7 +72,13 @@ public:
 	float		mMoveSpeed;
 	float		mAttackDistance;
 
+private:
+	UDataTable* mPlayerDataTable;
+	
+public:
+	APOKPlayerState();
+
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
 };

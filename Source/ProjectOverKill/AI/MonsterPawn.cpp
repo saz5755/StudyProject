@@ -1,6 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "MonsterPawn.h"
 #include "DefaultAIController.h"
 #include "MonsterAnimInstance.h"
@@ -70,7 +67,6 @@ void AMonsterPawn::BeginPlay()
 	MonsterInfo->mInteractionDistance = Data->mTraceDistance;
 
 	mMovement->MaxSpeed = MonsterInfo->mMoveSpeed;
-
 
 	// Cast<>() 함수는 형변환을 해주는 함수이다.
 	// <> 안에 지정된 타입과 다른 타입으로 생성된 객체인 경우 nullptr을 반환한다.

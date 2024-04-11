@@ -32,7 +32,6 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<TObjectPtr<UAnimMontage>>	mAttackMontageArray;
-	//TArray<UAnimMontage*>
 
 	// 공격 몽타주를 재생하기 위한 인덱스이다.
 	int32	mAttackIndex;
@@ -61,15 +60,13 @@ protected:
 public:
 	UPlayerAnimInstance();
 
-public:
+	virtual void NativeInitializeAnimation();
+	virtual void NativeUpdateAnimation(float DeltaSeconds);
+
 	void SetAnimType(EPlayerAnimType Type)
 	{
 		mAnimType = Type;
 	}
-
-public:
-	virtual void NativeInitializeAnimation();
-	virtual void NativeUpdateAnimation(float DeltaSeconds);
 
 public:
 	void PlayAttackMontage();

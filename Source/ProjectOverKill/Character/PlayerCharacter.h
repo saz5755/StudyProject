@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "../GameInfo.h"
@@ -7,14 +5,10 @@
 #include "../Player/PlayerAnimInstance.h"
 #include "PlayerCharacter.generated.h"
 
-
 UCLASS()
 class PROJECTOVERKILL_API APlayerCharacter : public ACharacter
 {
 	GENERATED_BODY()
-
-public:
-	FORCEINLINE EPlayerAnimType GetCharacterState() const { return mAnimType; }
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
@@ -43,43 +37,33 @@ protected:
 	FTimerHandle	mGhostTimer;
 	int32			mGhostTimerCount = 10;
 
-
 private:
 	EPlayerAnimType mAnimType = EPlayerAnimType::Default;
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
+	
+	// Function
 public:
-
 	APlayerCharacter();
 
-	virtual void OnConstruction(const FTransform& Transform);
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	FORCEINLINE EPlayerAnimType GetCharacterState() const { return mAnimType; }
 
-	// Called to bind functionality to input
+	virtual void OnConstruction(const FTransform& Transform);
+	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
 		class AController* EventInstigator, AActor* DamageCauser);
 
+protected:
+	virtual void BeginPlay() override;
+
+
 public:
 	void PlayAttackMontage();
 	void PlaySkillMontage(int32 Index);
 	void PlayJump();
-
-public:
 	virtual void NormalAttack();
 
-public:
-	void SetWeaponMesh(USkeletalMesh* WeaponMesh);
-	void SetHelmetMesh(USkeletalMesh* HelmetMesh);
-	void SetArmorMesh(USkeletalMesh* ArmorMesh);
-	void SetBootsMesh(USkeletalMesh* BootsMesh);
-
-public:
 	void OnCustomDepthStencil(bool Enable);
 	void SetCustomStencil(int32 Stencil);
 	void OnOutLine(bool OnOff);
@@ -87,8 +71,12 @@ public:
 	void SetColor(int32 Color);
 
 	void OnStep(bool Left);
-
 	void OnGhost();
+
+	void SetWeaponMesh(USkeletalMesh* WeaponMesh);
+	void SetHelmetMesh(USkeletalMesh* HelmetMesh);
+	void SetArmorMesh(USkeletalMesh* ArmorMesh);
+	void SetBootsMesh(USkeletalMesh* BootsMesh);
 
 private:
 	UFUNCTION()

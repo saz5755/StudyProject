@@ -39,22 +39,11 @@ protected:
 	UPROPERTY()
 	APOKHUD* HUD;
 
-public:
-	AMainPlayerController();
-	
-	FORCEINLINE bool IsInteracting() const { return GetWorldTimerManager().IsTimerActive(TimerHandle_Interaction); };
-	
-	FORCEINLINE UInventoryComponent* GetInventory() const { return PlayerInventory; };
-
-	void UpdateInteractionWidget() const;
-
-	void DropItem(UItemBase* ItemToDrop, const int32 QuantityToDrop);
-
 private:
 	TSubclassOf<UUserWidget>	mMainWidgetClass;
 	class UMainViewportWidget* mMainWidget;
 	float	mMoveDir;
-	
+
 	bool	mDetectEnable = false;
 	float	mDetectTime = 0.f;
 	float	mDetectDuration = 4.f;
@@ -63,24 +52,21 @@ private:
 	TArray<AActor*>	mDetectActorArray;
 
 public:
-	class UMainViewportWidget* GetMainWidget()
-	{
-		return mMainWidget;
-	}
+	AMainPlayerController();
+	virtual void Tick(float DeltaTime) override;
+	
+	class UMainViewportWidget* GetMainWidget(){return mMainWidget;}
+	float GetMoveDir(){return mMoveDir;}
 
-	float GetMoveDir()
-	{
-		return mMoveDir;
-	}
+	FORCEINLINE bool IsInteracting() const { return GetWorldTimerManager().IsTimerActive(TimerHandle_Interaction); };
+	FORCEINLINE UInventoryComponent* GetInventory() const { return PlayerInventory; };
+	void UpdateInteractionWidget() const;
+	void DropItem(UItemBase* ItemToDrop, const int32 QuantityToDrop);
 
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
 
-public:
-	virtual void Tick(float DeltaTime) override;
-
-protected:
 	void OnLookMouse(const FInputActionValue& InputActionValue);
 	void OnMove(const FInputActionValue& InputActionValue);
 	void OnAttack(const FInputActionValue& InputActionValue);
@@ -92,7 +78,6 @@ protected:
 	void OnSkill1(const FInputActionValue& InputActionValue);
 	void OnSkill2(const FInputActionValue& InputActionValue);
 	void OnSkill3(const FInputActionValue& InputActionValue);
-
 
 	// Inventory Section
 protected:
@@ -109,7 +94,7 @@ protected:
 
 	FInteractionData InteractionData;
 
-	// Function
+	// Inventory Function
 
 	void ToggleMenu();
 

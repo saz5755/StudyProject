@@ -9,16 +9,12 @@ void UInventoryPanel::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	//InventoryWrapBox = Cast<UWrapBox>(GetWidgetFromName(TEXT("InventoryWrapBox")));
-
 	InventoryListview = Cast<UListView>(GetWidgetFromName(TEXT("InventoryListviewTest")));
 	WeightInfo = Cast<UTextBlock>(GetWidgetFromName(TEXT("WeightInfo")));
 	CapacityInfo = Cast<UTextBlock>(GetWidgetFromName(TEXT("CapacityInfo")));
 
 	PlayerController = Cast<AMainPlayerController>(GetWorld()->GetFirstPlayerController());
 	
-	// InventoryReference = PlayerController->GetInventory();
-
 	if (PlayerController)
 	{
 		InventoryReference = PlayerController->GetInventory();
@@ -84,7 +80,6 @@ void UInventoryPanel::RefreshInventory()
 {
 	if (InventoryReference && IventorySlotClass)
 	{
-		//InventoryWrapBox->ClearChildren();
 
 		InventoryListview->ClearListItems();
 
@@ -93,11 +88,8 @@ void UInventoryPanel::RefreshInventory()
 			UInventoryItemSlot* ItemSlot = CreateWidget<UInventoryItemSlot>(this, IventorySlotClass);
 			
 			ItemSlot->SetItemReference(InventoryItem);
-		
-			//InventoryWrapBox->AddChildToWrapBox(ItemSlot);
 			InventoryListview->AddItem(ItemSlot);
 		}
-
 		SetInfoText();
 	}
 

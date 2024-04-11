@@ -55,7 +55,6 @@ void AMainPlayerController::SetupInputComponent()
 	Super::SetupInputComponent();
 
 	// InputComponent : 입력관리 컴포넌트. 플레이어 컨트롤러가 이미 가지고 있는 객체이다.
-
 	UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
 	ensure(EnhancedInputComponent);
 

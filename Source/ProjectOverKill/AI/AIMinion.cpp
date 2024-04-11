@@ -1,6 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "AIMinion.h"
 #include "DefaultAIController.h"
 #include "MonsterAnimInstance.h"

@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "../GameInfo.h"
@@ -19,7 +17,6 @@ class PROJECTOVERKILL_API AAIPawn : public APawn
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this pawn's properties
 	AAIPawn();
 
 protected:
@@ -136,25 +133,23 @@ public:
 	}
 
 public:
-	virtual void ChangeAIAnimType(uint8 AnimType);
-
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason);
-
-public:	
 	virtual void OnConstruction(const FTransform& Transform);
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	virtual void ChangeAIAnimType(uint8 AnimType);
 
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
 		class AController* EventInstigator, AActor* DamageCauser);
 
 public:
-	void OnCustomDepthStencil(bool Enable);
-	void SetCustomStencil(int32 Stencil);
-	void OnOutLine(bool OnOff);
-	void OnOcclusion(bool OnOff);
-	void SetColor(int32 Color);
+		void OnCustomDepthStencil(bool Enable);
+		void SetCustomStencil(int32 Stencil);
+		void OnOutLine(bool OnOff);
+		void OnOcclusion(bool OnOff);
+		void SetColor(int32 Color);
+
+protected:
+	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason);
+
 };

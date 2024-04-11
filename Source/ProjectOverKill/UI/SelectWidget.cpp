@@ -1,6 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "SelectWidget.h"
 #include "../Character/SelectCharacter/CharacterSelectPlayerController.h"
 
@@ -20,7 +17,7 @@ void USelectWidget::SetStartButtonEnable(bool Enable)
 }
 
 void USelectWidget::StartButtonClick()
-{
+{	
 	// 이름을 입력하지 않았다면 처리하지 않는다.
 	if (mInputName->GetText().IsEmpty())
 		return;

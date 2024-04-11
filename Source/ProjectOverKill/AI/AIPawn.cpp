@@ -1,15 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "AIPawn.h"
 #include "DefaultAIController.h"
 #include "AISpawnPoint.h"
 #include "../PointActor.h"
 
-// Sets default values
 AAIPawn::AAIPawn()
 {
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	mAttackEnd = false;
@@ -27,7 +22,6 @@ AAIPawn::AAIPawn()
 
 	// Mesh를 Capsule의 Child로 지정한다.
 	mMesh->SetupAttachment(mCapsule);
-
 
 	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 	//AIControllerClass = ADefaultAIController::StaticClass();
@@ -68,7 +62,6 @@ void AAIPawn::ChangeAIAnimType(uint8 AnimType)
 {
 }
 
-// Called when the game starts or when spawned
 void AAIPawn::BeginPlay()
 {
 	Super::BeginPlay();
@@ -102,11 +95,9 @@ void AAIPawn::OnConstruction(const FTransform& Transform)
 	Super::OnConstruction(Transform);
 }
 
-// Called every frame
 void AAIPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 float AAIPawn::TakeDamage(float DamageAmount, 
@@ -116,7 +107,6 @@ float AAIPawn::TakeDamage(float DamageAmount,
 	DamageAmount = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 
 	//Destroy();
-
 	return DamageAmount;
 }
 
