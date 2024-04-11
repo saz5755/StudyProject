@@ -361,7 +361,6 @@ void APlayerCharacter::OnStep(bool Left)
 
 	FCollisionQueryParams	param(NAME_None, false, this);
 	param.bReturnPhysicalMaterial = true;
-
 	bool IsCollision = GetWorld()->LineTraceSingleByChannel(result, StartLocation,
 		EndLocation, ECC_Visibility, param);
 
