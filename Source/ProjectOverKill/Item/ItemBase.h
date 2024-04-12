@@ -42,7 +42,6 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Item")
 	FItemAssetData AssetData;
 
-
 	bool bIsCopy;
 	bool bIsPickup;
 
