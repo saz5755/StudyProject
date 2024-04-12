@@ -57,7 +57,6 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-
 public:
 	void PlayAttackMontage();
 	void PlaySkillMontage(int32 Index);

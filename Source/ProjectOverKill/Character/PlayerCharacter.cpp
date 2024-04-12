@@ -15,6 +15,7 @@
 #include "NiagaraActor.h"
 #include "DrawDebugHelpers.h"
 #include "../Interfaces/HitInterface.h"
+#include "Breakable/BreakableActor.h"
 
 APlayerCharacter::APlayerCharacter()
 {
@@ -178,7 +179,6 @@ void APlayerCharacter::NormalAttack()
 	/*DrawDebugCapsule(GetWorld(), (StartLocation + EndLocation) / 2.f,
 		State->mAttackDistance / 2.f, 50.f, FRotationMatrix::MakeFromZ(GetActorForwardVector()).ToQuat(),
 		DrawColor, false, 3.f);*/
-
 #endif
 
 	if (IsCollision)
@@ -199,7 +199,7 @@ void APlayerCharacter::NormalAttack()
 				resultArray[i].ImpactPoint,
 				resultArray[i].ImpactNormal.Rotation(), SpawnParam);
 
-			Effect->SetParticleAsset(TEXT("/Script/Engine.ParticleSystem'/Game/ParagonMinions/FX/Particles/Minions/Minion_melee/FX/Impacts/P_Minion_Impact_Default.P_Minion_Impact_Default'"));
+			//Effect->SetParticleAsset(TEXT("/Script/Engine.ParticleSystem'/Game/ParagonMinions/FX/Particles/Minions/Minion_melee/FX/Impacts/P_Minion_Impact_Default.P_Minion_Impact_Default'"));
 		
 			IHitInterface* HitInterface = Cast<IHitInterface>(resultArray[i].GetActor());
 			if (HitInterface)

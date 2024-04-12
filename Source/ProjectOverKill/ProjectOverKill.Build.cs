@@ -21,6 +21,7 @@ public class ProjectOverKill : ModuleRules
 			, "MediaAssets"
 			, "Slate"
 			, "SlateCore"
+			, "GeometryCollectionEngine"
         });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
