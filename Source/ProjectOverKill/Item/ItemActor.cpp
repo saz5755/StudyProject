@@ -8,8 +8,10 @@ AItemActor::AItemActor()
 	mRoot = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 
 	mRoot->bVisualizeComponent = true;
-
 	SetRootComponent(mRoot);
+	
+	EmbersEffect = CreateDefaultSubobject<UNiagaraComponent>(TEXT("Embers"));
+	EmbersEffect->SetupAttachment(mRoot);
 }
 
 void AItemActor::BeginPlay()

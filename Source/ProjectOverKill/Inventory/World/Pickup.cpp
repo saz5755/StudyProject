@@ -11,6 +11,10 @@ APickup::APickup()
 	PickupMesh->SetSimulatePhysics(true);
 	PickupMesh->SetupAttachment(mRoot);
 
+	// pickup가능한 아이템의 경우에는 메시 하위로 이펙트를 적용시킴으로써 
+	// 아이템의 좌표가 바뀌어도 따라가도록 설정
+	EmbersEffect->SetupAttachment(PickupMesh);
+
 }
 
 void APickup::BeginPlay()

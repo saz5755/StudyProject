@@ -17,6 +17,9 @@ public:
 protected:
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* mRoot;
+	
+	UPROPERTY(EditAnywhere)
+	class UNiagaraComponent* EmbersEffect;
 
 protected:
 	virtual void BeginPlay() override;
