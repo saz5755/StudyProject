@@ -60,6 +60,7 @@ void UBTService_DetectTarget::TickNode(UBehaviorTreeComponent& OwnerComp, uint8*
 		// result.GetActor() : 충돌된 액터를 얻어온다.
 		Controller->GetBlackboardComponent()->SetValueAsObject(TEXT("Target"),
 			result.GetActor());
+
 	}
 
 	// 충돌이 안될경우 nullptr을 지정한다.
@@ -67,5 +68,7 @@ void UBTService_DetectTarget::TickNode(UBehaviorTreeComponent& OwnerComp, uint8*
 	{
 		Controller->GetBlackboardComponent()->SetValueAsObject(TEXT("Target"),
 			nullptr);
+		Pawn->HideHealthBar();
 	}
+		
 }

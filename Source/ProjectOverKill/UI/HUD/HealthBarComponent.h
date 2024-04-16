@@ -11,6 +11,7 @@ class PROJECTOVERKILL_API UHealthBarComponent : public UWidgetComponent
 	
 public:
 	void SetHealthPercent(float Percent);
+	UHealthBar* GetHealthBarWidget() {return HealthBarWidget;}
 
 private:
 	UPROPERTY()

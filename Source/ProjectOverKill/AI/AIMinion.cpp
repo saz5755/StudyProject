@@ -79,6 +79,5 @@ void AAIMinion::NormalAttack()
 			result.ImpactNormal.Rotation(), SpawnParam);
 
 		Effect->SetParticleAsset(TEXT("/Script/Engine.ParticleSystem'/Game/ParagonMinions/FX/Particles/Minions/Minion_melee/FX/Impacts/P_Minion_Impact_Default.P_Minion_Impact_Default'"));
-		//Effect->SetSoundAsset(TEXT("/Script/MetasoundEngine.MetaSoundSource'/Game/Audio/MetaSounds/sfx_HitMonster.sfx_HitMonster'"));
 	}
 }

@@ -41,6 +41,7 @@ AAIPawn::AAIPawn()
 	mAIInfo = nullptr;
 }
 
+
 void AAIPawn::SetPatrolArray(const TArray<class APointActor*>& PatrolArray)
 {
 	// 포인트가 비어 있을 경우 예외처리
@@ -72,10 +73,6 @@ void AAIPawn::BeginPlay()
 	// 1번 인덱스부터 방문할 수 있게 한다.
 	mPatrolIndex = 1;
 
-	if (HealthBarWidget)
-	{
-		HealthBarWidget->SetHealthPercent(.1f);
-	}
 }
 
 void AAIPawn::EndPlay(const EEndPlayReason::Type EndPlayReason)
@@ -115,6 +112,11 @@ float AAIPawn::TakeDamage(float DamageAmount,
 
 	//Destroy();
 	return DamageAmount;
+}
+
+void AAIPawn::ReceiveDamage(float Damage)
+{
+	UE_LOG(LogTemp, Warning, TEXT("ReceiveDamage"));
 }
 
 void AAIPawn::OnCustomDepthStencil(bool Enable)
@@ -218,3 +220,20 @@ void AAIPawn::SetColor(int32 Color)
 
 	mMesh->SetCustomDepthStencilValue(mStencilValue);
 }
+
+void AAIPawn::HideHealthBar()
+{
+	if (HealthBarWidget)
+	{
+		HealthBarWidget->SetVisibility(false);
+	}
+}
+
+void AAIPawn::ShowHealthBar()
+{
+	if (HealthBarWidget)
+	{
+		HealthBarWidget->SetVisibility(true);
+	}
+}
+

@@ -198,8 +198,6 @@ void APlayerCharacter::NormalAttack()
 			AEffectBase* Effect = GetWorld()->SpawnActor<AEffectBase>(
 				resultArray[i].ImpactPoint,
 				resultArray[i].ImpactNormal.Rotation(), SpawnParam);
-
-			//Effect->SetParticleAsset(TEXT("/Script/Engine.ParticleSystem'/Game/ParagonMinions/FX/Particles/Minions/Minion_melee/FX/Impacts/P_Minion_Impact_Default.P_Minion_Impact_Default'"));
 		
 			IHitInterface* HitInterface = Cast<IHitInterface>(resultArray[i].GetActor());
 			if (HitInterface)

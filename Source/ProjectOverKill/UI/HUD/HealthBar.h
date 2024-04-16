@@ -1,7 +1,9 @@
 #pragma once
 
-#include "CoreMinimal.h"
+#include "../../GameInfo.h"
 #include "Blueprint/UserWidget.h"
+#include "Components/ProgressBar.h"
+
 #include "HealthBar.generated.h"
 
 class UProgressBar;
@@ -11,11 +13,8 @@ class PROJECTOVERKILL_API UHealthBar : public UUserWidget
 {
 	GENERATED_BODY()
 
-protected:
-	virtual void NativeConstruct();
-
 public:
 	UPROPERTY(meta = (BindWidget))
-	class UProgressBar* HealthBar;
+	UProgressBar* HealthBar;
 
 };

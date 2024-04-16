@@ -7,6 +7,7 @@
 
 class UHealthBarComponent;
 class UAIState;
+class UHealthBar;
 
 struct FAIInfo
 {
@@ -21,6 +22,9 @@ class PROJECTOVERKILL_API AAIPawn : public APawn
 
 public:
 	AAIPawn();
+
+	void HideHealthBar();
+	void ShowHealthBar();
 
 protected:
 	UPROPERTY(EditAnywhere)
@@ -37,6 +41,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere)
 	UHealthBarComponent* HealthBarWidget;
+	
+	UPROPERTY(VisibleAnywhere)
+	UHealthBar* HealthBar;
 
 	FAIInfo* mAIInfo;
 	
@@ -146,6 +153,8 @@ public:
 
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
 		class AController* EventInstigator, AActor* DamageCauser);
+
+	virtual void ReceiveDamage(float Damage);
 
 public:
 		void OnCustomDepthStencil(bool Enable);

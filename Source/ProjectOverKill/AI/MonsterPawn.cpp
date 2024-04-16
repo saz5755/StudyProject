@@ -4,6 +4,8 @@
 #include "../Interfaces/HitInterface.h"
 #include "MonsterState.h"
 #include "Effect/EffectBase.h"
+#include "UI/HUD//HealthBarComponent.h"
+
 
 UDataTable* AMonsterPawn::mMonsterDataTable = nullptr;
 
@@ -49,32 +51,15 @@ void AMonsterPawn::BeginPlay()
 {
 	Super::BeginPlay();
 
-	mAIInfo = new FMonsterInfo;
-
-	FMonsterInfo* MonsterInfo = (FMonsterInfo*)mAIInfo;
-
-	const FMonsterData* Data = FindMonsterData(mTableRowName);
-
-	mAttackPoint = Data->mAttackPoint;
-
-	MonsterInfo->mAttackPoint = Data->mAttackPoint;
-	MonsterInfo->mArmorPoint = Data->mArmorPoint;
-	MonsterInfo->mHP = Data->mHPMax;
-	MonsterInfo->mHPMax = Data->mHPMax;
-	MonsterInfo->mMP = Data->mMPMax;
-	MonsterInfo->mMPMax = Data->mMPMax;
-	MonsterInfo->mMoveSpeed = Data->mMoveSpeed;
-	MonsterInfo->mAttackDistance = Data->mAttackDistance;
-	MonsterInfo->mInteractionDistance = Data->mTraceDistance;
-
-	mMovement->MaxSpeed = MonsterInfo->mMoveSpeed;
-
+	InitializeMonster();
+	
 	// Cast<>() 함수는 형변환을 해주는 함수이다.
 	// <> 안에 지정된 타입과 다른 타입으로 생성된 객체인 경우 nullptr을 반환한다.
 	mAnimInst = Cast<UMonsterAnimInstance>(mMesh->GetAnimInstance());
 
 	mCapsule->OnComponentBeginOverlap.AddDynamic(this,
 		&AMonsterPawn::BeginOverlap);
+
 }
 
 void AMonsterPawn::OnConstruction(const FTransform& Transform)
@@ -154,16 +139,21 @@ float AMonsterPawn::TakeDamage(float DamageAmount,
 		mHitEnable = true;
 		mHitTime = 0.f;
 	}
-
+	
+	//mMonsterState->mHP = FMath::Clamp(mMonsterState->mHP, 0.f, mMonsterState->mHPMax);
 	mMonsterState->mHP -= DamageAmount;
+
+	HealthBarWidget->SetHealthPercent(mMonsterState->mHP / (float)mMonsterState->mHPMax);
 
 	if (mMonsterState->mHP <= 0)
 	{
 		mAnimInst->ChangeAnimType(EMonsterAnimType::Death);
+		mCapsule->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 
 	return DamageAmount;
 }
+
 
 void AMonsterPawn::NormalAttack()
 {
@@ -171,6 +161,16 @@ void AMonsterPawn::NormalAttack()
 
 void AMonsterPawn::GetHit(const FVector& ImpactPoint, AActor* Hitter)
 {
+	ShowHealthBar();
+
+	/*UGameplayStatics::ApplyDamage
+	(Hitter,
+		60.f,
+		GetInstigator()->GetController(),
+		GetWorld()->GetFirstPlayerController()->GetCharacter(),
+		UDamageType::StaticClass()
+	);*/
+
 	//mAnimInst->ChangeAnimType(EMonsterAnimType::HitReact);
 
 	if (mAnimInst)
@@ -224,6 +224,32 @@ void AMonsterPawn::GetHit(const FVector& ImpactPoint, AActor* Hitter)
 	Effect->SetSoundAsset(TEXT("/Script/MetasoundEngine.MetaSoundSource'/Game/Audio/MetaSounds/sfx_HitMonster.sfx_HitMonster'"));
 
 }
+
+void AMonsterPawn::InitializeMonster()
+{
+	mAIInfo = new FMonsterInfo;
+
+	FMonsterInfo* MonsterInfo = (FMonsterInfo*)mAIInfo;
+
+	const FMonsterData* Data = FindMonsterData(mTableRowName);
+
+	mAttackPoint = Data->mAttackPoint;
+
+	MonsterInfo->mAttackPoint = Data->mAttackPoint;
+	MonsterInfo->mArmorPoint = Data->mArmorPoint;
+	MonsterInfo->mHP = Data->mHPMax;
+	MonsterInfo->mHPMax = Data->mHPMax;
+	MonsterInfo->mMP = Data->mMPMax;
+	MonsterInfo->mMPMax = Data->mMPMax;
+	MonsterInfo->mMoveSpeed = Data->mMoveSpeed;
+	MonsterInfo->mAttackDistance = Data->mAttackDistance;
+	MonsterInfo->mInteractionDistance = Data->mTraceDistance;
+
+	mMovement->MaxSpeed = MonsterInfo->mMoveSpeed;
+
+	HideHealthBar();
+}
+
 
 void AMonsterPawn::BeginOverlap(UPrimitiveComponent* OverlappedComponent,
 	AActor* OtherActor, UPrimitiveComponent* OtherComp,

@@ -28,5 +28,4 @@ public:
 	void SetHP(int32 HP, int32 HPMax);
 	void SetMP(int32 MP, int32 MPMax);
 
-
 };
