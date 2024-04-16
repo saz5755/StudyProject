@@ -11,8 +11,11 @@ class PROJECTOVERKILL_API ABreakableActor : public AActor, public IHitInterface
 	GENERATED_BODY()
 	
 public:
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	UGeometryCollectionComponent* GeometryCollection;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UCapsuleComponent* Capsule;
 
 public:	
 	ABreakableActor();
@@ -32,5 +35,7 @@ public:
 private:
 	UPROPERTY(EditAnywhere, Category = "Breakable Properties")
 	TArray<TSubclassOf<class ATreasureActor>> TreasureClasses;
+
+	bool bBroken = false;
 
 };
