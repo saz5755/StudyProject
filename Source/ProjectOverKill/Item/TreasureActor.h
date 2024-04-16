@@ -26,4 +26,7 @@ private:
 	UPROPERTY(EditAnywhere)
 	USphereComponent* SphereComponent;
 
+	UPROPERTY(EditAnywhere, Category = "Treasure Properties")
+	int32 Gold;
+
 };

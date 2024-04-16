@@ -1,5 +1,6 @@
 #include "Breakable/BreakableActor.h"
 #include "GeometryCollection/GeometryCollectionComponent.h"
+#include "Item//TreasureActor.h"
 
 ABreakableActor::ABreakableActor()
 {
@@ -13,7 +14,18 @@ ABreakableActor::ABreakableActor()
 void ABreakableActor::GetHit(const FVector& ImpactPoint, AActor* Hitter)
 {
 	UE_LOG(LogTemp, Warning, TEXT("BreakableActor - GetHit"));
+	
 	CreateFields(ImpactPoint);
+	
+	UWorld* World = GetWorld();
+	if (World && TreasureClasses.Num() > 0)
+	{
+		FVector Location = GetActorLocation();
+		Location.Z += 75.0f;
+
+		const int32 Selection = FMath::RandRange(0, TreasureClasses.Num() - 1);
+		World->SpawnActor<ATreasureActor>(TreasureClasses[Selection], Location, GetActorRotation());
+	}
 }
 
 void ABreakableActor::BeginPlay()

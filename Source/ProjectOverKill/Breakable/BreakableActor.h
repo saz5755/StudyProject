@@ -29,5 +29,8 @@ protected:
 public:	
 	virtual void Tick(float DeltaTime) override;
 
+private:
+	UPROPERTY(EditAnywhere, Category = "Breakable Properties")
+	TArray<TSubclassOf<class ATreasureActor>> TreasureClasses;
 
 };
