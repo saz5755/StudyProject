@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../GameInfo.h"
+#include "../../Item/ItemActor.h"
 #include "GameFramework/Actor.h"
 #include "Pickup.generated.h"
 
@@ -8,7 +8,7 @@ class UItemBase;
 class AMainPlayerController;
 
 UCLASS()
-class PROJECTOVERKILL_API APickup : public AActor, public IInteractionInterface
+class PROJECTOVERKILL_API APickup : public AItemActor, public IInteractionInterface
 {
 	GENERATED_BODY()
 

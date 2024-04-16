@@ -9,7 +9,7 @@ APickup::APickup()
 
 	PickupMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PickupMesh"));
 	PickupMesh->SetSimulatePhysics(true);
-	SetRootComponent(PickupMesh);
+	PickupMesh->SetupAttachment(mRoot);
 
 }
 
