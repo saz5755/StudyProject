@@ -14,6 +14,7 @@ ATreasureActor::ATreasureActor()
 	TreasureMesh->SetupAttachment(mRoot);
 	SphereComponent->SetupAttachment(mRoot);
 
+	EmbersEffect->SetupAttachment(TreasureMesh);
 }
 
 void ATreasureActor::OnSphereOverlap(AActor* OtherActor)

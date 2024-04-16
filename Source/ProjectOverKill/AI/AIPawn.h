@@ -5,6 +5,9 @@
 #include "GameFramework/Pawn.h"
 #include "AIPawn.generated.h"
 
+class UHealthBarComponent;
+class UAIState;
+
 struct FAIInfo
 {
 	float		mMoveSpeed;
@@ -30,7 +33,10 @@ protected:
 	UFloatingPawnMovement* mMovement;
 
 	UPROPERTY(EditAnywhere)
-	class UAIState* mState;
+	UAIState* mState;
+
+	UPROPERTY(VisibleAnywhere)
+	UHealthBarComponent* HealthBarWidget;
 
 	FAIInfo* mAIInfo;
 	

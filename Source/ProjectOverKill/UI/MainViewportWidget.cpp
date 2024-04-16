@@ -1,6 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "MainViewportWidget.h"
 #include "PlayerHUDWidget.h"
 #include "UObject/UnrealTypePrivate.h"

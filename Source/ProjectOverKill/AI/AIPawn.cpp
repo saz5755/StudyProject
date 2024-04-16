@@ -2,6 +2,7 @@
 #include "DefaultAIController.h"
 #include "AISpawnPoint.h"
 #include "../PointActor.h"
+#include "UI/HUD//HealthBarComponent.h"
 
 AAIPawn::AAIPawn()
 {
@@ -12,9 +13,7 @@ AAIPawn::AAIPawn()
 	// 컴포넌트 생성
 	mCapsule = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Body"));
 	mMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh"));
-
 	mMovement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("Movement"));
-
 	mMovement->SetUpdatedComponent(mCapsule);
 
 	// 루트컴포넌트로 캡슐을 지정한다.
@@ -22,6 +21,9 @@ AAIPawn::AAIPawn()
 
 	// Mesh를 Capsule의 Child로 지정한다.
 	mMesh->SetupAttachment(mCapsule);
+
+	HealthBarWidget = CreateDefaultSubobject<UHealthBarComponent>(TEXT("HealthBar"));
+	HealthBarWidget->SetupAttachment(mCapsule);
 
 	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 	//AIControllerClass = ADefaultAIController::StaticClass();
@@ -69,6 +71,11 @@ void AAIPawn::BeginPlay()
 	// 0번인덱스에는 이 AI의 시작 위치를 넣어주고 있기 때문에
 	// 1번 인덱스부터 방문할 수 있게 한다.
 	mPatrolIndex = 1;
+
+	if (HealthBarWidget)
+	{
+		HealthBarWidget->SetHealthPercent(.1f);
+	}
 }
 
 void AAIPawn::EndPlay(const EEndPlayReason::Type EndPlayReason)
