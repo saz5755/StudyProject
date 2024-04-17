@@ -147,8 +147,9 @@ float AMonsterPawn::TakeDamage(float DamageAmount,
 
 	if (mMonsterState->mHP <= 0)
 	{
-		mAnimInst->ChangeAnimType(EMonsterAnimType::Death);
 		mCapsule->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		mAnimInst->ChangeAnimType(EMonsterAnimType::Death);
+
 	}
 
 	return DamageAmount;

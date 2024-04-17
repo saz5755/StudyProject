@@ -114,11 +114,6 @@ float AAIPawn::TakeDamage(float DamageAmount,
 	return DamageAmount;
 }
 
-void AAIPawn::ReceiveDamage(float Damage)
-{
-	UE_LOG(LogTemp, Warning, TEXT("ReceiveDamage"));
-}
-
 void AAIPawn::OnCustomDepthStencil(bool Enable)
 {
 	// CustomDepthStencil 버퍼에 값을 쓸지 결정한다.
