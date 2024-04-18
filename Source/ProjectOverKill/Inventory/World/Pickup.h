@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../Item/ItemActor.h"
+#include "../Interfaces/InteractionInterface.h"
 #include "GameFramework/Actor.h"
 #include "Pickup.generated.h"
 
@@ -29,11 +30,8 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Pickup | Components")
 	UStaticMeshComponent* PickupMesh;
 
-	UPROPERTY(EditInstanceOnly, Category = "Pickup | Item Initialization")
-	UDataTable* ItemDataTable;
-
-	UPROPERTY(EditInstanceOnly, Category = "Pickup | Item Initialization")
-	FName DesiredItemID;
+	UPROPERTY(EditAnywhere, Category = "Pickup | Item Initialization")
+	FString DesiredItemID;
 
 	UPROPERTY(EditAnywhere, Category = "Pickup | Item Reference")
 	UItemBase* ItemReference;
@@ -43,6 +41,12 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Pickup | Item Initialization")
 	int32 ItemQuantity;
+	
+public:
+	void SetItemID(const FString& ID)
+	{
+		DesiredItemID = ID;
+	}
 
 	//UPROPERTY(EditAnywhere, Category = "Pickup | Interaction")
 	//FItemNumericData NumericDataTest;

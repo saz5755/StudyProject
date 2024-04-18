@@ -12,12 +12,12 @@ AItemActor::AItemActor()
 	
 	EmbersEffect = CreateDefaultSubobject<UNiagaraComponent>(TEXT("Embers"));
 	EmbersEffect->SetupAttachment(mRoot);
+
 }
 
 void AItemActor::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 void AItemActor::Tick(float DeltaTime)

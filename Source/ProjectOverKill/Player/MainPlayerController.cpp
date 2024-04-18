@@ -495,7 +495,6 @@ void AMainPlayerController::BeginInteract()
 					TargetInteractable->InteractableData.InteractionDuration,
 					false);
 			}
-
 		}
 	}
 

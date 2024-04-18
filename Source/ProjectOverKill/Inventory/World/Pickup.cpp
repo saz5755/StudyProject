@@ -2,6 +2,7 @@
 #include "../../Item/ItemBase.h"
 #include "Components/InventoryComponent.h"
 #include "Player/MainPlayerController.h"
+#include "Item/ItemManager.h"
 
 APickup::APickup()
 {
@@ -15,6 +16,12 @@ APickup::APickup()
 	// 아이템의 좌표가 바뀌어도 따라가도록 설정
 	EmbersEffect->SetupAttachment(PickupMesh);
 
+	static ConstructorHelpers::FObjectFinder<UNiagaraSystem> ItemEffect(TEXT("/Script/Niagara.NiagaraSystem'/Game/Effect/Niaraga/NS_Embers.NS_Embers'"));
+
+	if (ItemEffect.Succeeded())
+	{
+		EmbersEffect->SetAsset(ItemEffect.Object);
+	}
 }
 
 void APickup::BeginPlay()
@@ -23,13 +30,16 @@ void APickup::BeginPlay()
 
 	InitializePickup(UItemBase::StaticClass(), ItemQuantity);
 
+
 }
 
 void APickup::InitializePickup(const TSubclassOf<UItemBase> BaseClass, const int32 InQuantity)
 {
-	if (ItemDataTable && !DesiredItemID.IsNone())
+	if (!DesiredItemID.IsEmpty())
 	{
-		const FItemData* ItemData = ItemDataTable->FindRow<FItemData>(DesiredItemID, DesiredItemID.ToString());
+		const UItemManager* Mgr = GetDefault<UItemManager>();
+
+		const FItemData* ItemData = Mgr->FindItem(DesiredItemID);
 
 		ItemReference = NewObject<UItemBase>(this, BaseClass);
 
@@ -46,6 +56,28 @@ void APickup::InitializePickup(const TSubclassOf<UItemBase> BaseClass, const int
 		PickupMesh->SetStaticMesh(ItemData->AssetData.Mesh);
 	
 		UpdateInteractableData();
+
+		switch (ItemReference->ItemType)
+		{
+		case EItemType::Armor:
+			EmbersEffect->SetColorParameter(TEXT("Color"), FLinearColor(1.f, 0.f, 0.f, 1.f));
+			break;
+		case EItemType::Weapon:
+			EmbersEffect->SetColorParameter(TEXT("Color"), FLinearColor(1.f, 1.f, 0.f, 1.f));
+			break;
+		case EItemType::Shield:
+			break;
+		case EItemType::Spell:
+			break;
+		case EItemType::Boots:
+			break;
+		case EItemType::Consumable:
+			break;
+		case EItemType::Quest:
+			break;
+		case EItemType::Mundane:
+			break;
+		}
 	}
 }
 
@@ -143,14 +175,13 @@ void APickup::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent
 
 	if (ChangedPropertyName == GET_MEMBER_NAME_CHECKED(APickup, DesiredItemID))
 	{
+		const UItemManager* Mgr = GetDefault<UItemManager>();
 
-		if (ItemDataTable)
+		const FItemData* ItemData = Mgr->FindItem(DesiredItemID);
+
+		if (ItemData)
 		{
-
-			if (const FItemData* ItemData = ItemDataTable->FindRow<FItemData>(DesiredItemID, DesiredItemID.ToString()))
-			{
-				PickupMesh->SetStaticMesh(ItemData->AssetData.Mesh);
-			}
+			PickupMesh->SetStaticMesh(ItemData->AssetData.Mesh);
 		}
 	}
 }

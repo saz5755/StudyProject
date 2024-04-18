@@ -1,6 +1,9 @@
 #include "Breakable/BreakableActor.h"
 #include "GeometryCollection/GeometryCollectionComponent.h"
 #include "Item//TreasureActor.h"
+#include "../Inventory/World/Pickup.h"
+#include "../Item/ItemBase.h"
+#include "Item/PickupItemWeapon.h"
 
 ABreakableActor::ABreakableActor()
 {
@@ -26,14 +29,28 @@ void ABreakableActor::GetHit(const FVector& ImpactPoint, AActor* Hitter)
 	
 	CreateFields(ImpactPoint);
 	
+	FVector Location = GetActorLocation();
+	Location.Z += 75.0f;
+
 	UWorld* World = GetWorld();
 	if (World && TreasureClasses.Num() > 0)
 	{
-		FVector Location = GetActorLocation();
-		Location.Z += 75.0f;
-
 		const int32 Selection = FMath::RandRange(0, TreasureClasses.Num() - 1);
 		World->SpawnActor<ATreasureActor>(TreasureClasses[Selection], Location, GetActorRotation());
+	}
+	if (World && PickUpItemClasses.Num() > 0)
+	{
+		const int32 Selection = FMath::RandRange(0, PickUpItemClasses.Num() - 1);
+		/*APickup* PickupActor = World->SpawnActor<APickup>(PickUpItemClasses[Selection], Location, GetActorRotation());
+
+		PickupActor->SetItemID(TEXT("Weapon01"));*/
+
+		APickupItemWeapon* PickupActor = NewObject<APickupItemWeapon>();
+		PickupActor = World->SpawnActor<APickupItemWeapon>(Location, GetActorRotation());
+
+		PickupActor->SetItemID(TEXT("Weapon02"));
+
+		PickupActor->InitializePickup(UItemBase::StaticClass(), 1);
 	}
 }
 
