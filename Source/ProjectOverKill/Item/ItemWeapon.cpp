@@ -25,3 +25,8 @@ void AItemWeapon::SetMesh(const FString& Path)
 	if (Mesh)
 		mMesh->SetSkeletalMesh(Mesh);
 }
+
+FLinearColor AItemWeapon::SetItemWeaponColor()
+{
+	return FLinearColor(100.f, 20.f, 100.f, 1.f);
+}

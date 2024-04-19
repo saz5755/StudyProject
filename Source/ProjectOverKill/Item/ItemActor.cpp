@@ -9,9 +9,6 @@ AItemActor::AItemActor()
 
 	mRoot->bVisualizeComponent = true;
 	SetRootComponent(mRoot);
-	
-	EmbersEffect = CreateDefaultSubobject<UNiagaraComponent>(TEXT("Embers"));
-	EmbersEffect->SetupAttachment(mRoot);
 
 }
 

@@ -1,7 +1,7 @@
 #include "Item/PickupItemWeapon.h"
 #include "NiagaraComponent.h"
 
-APickupItemWeapon::APickupItemWeapon()
+FLinearColor APickupItemWeapon::SetItemWeaponColor()
 {
-	EmbersEffect->SetColorParameter(TEXT("Color"), FLinearColor(100.f, 100.f, 20.f, 1.f));
+	return FLinearColor(100.f, 20.f, 100.f, 1.f);
 }

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Item/ItemActor.h"
+#include "../Inventory/World/Pickup.h"
 #include "TreasureActor.generated.h"
 
 UCLASS()
-class PROJECTOVERKILL_API ATreasureActor : public AItemActor
+class PROJECTOVERKILL_API ATreasureActor : public APickup
 {
 	GENERATED_BODY()
 

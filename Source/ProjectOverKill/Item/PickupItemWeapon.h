@@ -9,6 +9,6 @@ class PROJECTOVERKILL_API APickupItemWeapon : public APickup
 	GENERATED_BODY()
 
 public:
-	APickupItemWeapon();
+	static FLinearColor SetItemWeaponColor();
 	
 };

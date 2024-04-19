@@ -41,6 +41,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Pickup | Item Initialization")
 	int32 ItemQuantity;
+
+	UPROPERTY(EditAnywhere)
+	class UNiagaraComponent* EmbersEffect;
 	
 public:
 	void SetItemID(const FString& ID)

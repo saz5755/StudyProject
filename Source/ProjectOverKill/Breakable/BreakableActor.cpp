@@ -3,7 +3,7 @@
 #include "Item//TreasureActor.h"
 #include "../Inventory/World/Pickup.h"
 #include "../Item/ItemBase.h"
-#include "Item/PickupItemWeapon.h"
+#include "Item/ItemWeapon.h"
 
 ABreakableActor::ABreakableActor()
 {
@@ -45,11 +45,10 @@ void ABreakableActor::GetHit(const FVector& ImpactPoint, AActor* Hitter)
 
 		PickupActor->SetItemID(TEXT("Weapon01"));*/
 
-		APickupItemWeapon* PickupActor = NewObject<APickupItemWeapon>();
-		PickupActor = World->SpawnActor<APickupItemWeapon>(Location, GetActorRotation());
+		AItemWeapon* PickupActor = NewObject<AItemWeapon>();
+		PickupActor = World->SpawnActor<AItemWeapon>(Location, GetActorRotation());
 
 		PickupActor->SetItemID(TEXT("Weapon02"));
-
 		PickupActor->InitializePickup(UItemBase::StaticClass(), 1);
 	}
 }
