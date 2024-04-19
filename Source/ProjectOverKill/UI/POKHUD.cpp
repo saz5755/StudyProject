@@ -4,7 +4,17 @@
 
 APOKHUD::APOKHUD()
 {
+	static ConstructorHelpers::FClassFinder<UMainMenu> InventoryMenuRef(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Blueprint/Main/UI/InventoryUI/WBP_MainMenu.WBP_MainMenu_C'"));
+	if (InventoryMenuRef.Succeeded())
+	{
+		MainMenuClass = InventoryMenuRef.Class;
+	}
 
+	static ConstructorHelpers::FClassFinder<UInteractionWidget> InteractionWidgetRef(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/Blueprint/Main/UI/InventoryUI/WBP_InteractionWidget.WBP_InteractionWidget_C'"));
+	if (InteractionWidgetRef.Succeeded())
+	{
+		InteractionWidgetClass = InteractionWidgetRef.Class;
+	}
 }
 
 void APOKHUD::BeginPlay()

@@ -15,6 +15,7 @@ AMainGameMode::AMainGameMode()
 	PlayerStateClass = APOKPlayerState::StaticClass();
 	DefaultPawnClass = ASoulKnightCharacter::StaticClass();
 	PlayerControllerClass = AMainPlayerController::StaticClass();
+
 	HUDClass = APOKHUD::StaticClass();
 }
 

@@ -39,19 +39,19 @@ void ABreakableActor::GetHit(const FVector& ImpactPoint, AActor* Hitter)
 		const int32 Selection = FMath::RandRange(0, TreasureClasses.Num() - 1);
 		World->SpawnActor<ATreasureActor>(TreasureClasses[Selection], Location, GetActorRotation());
 	}
+
 	if (World && PickUpItemClasses.Num() > 0)
 	{
-		const int32 Selection = FMath::RandRange(0, PickUpItemClasses.Num() - 1);
-		/*APickup* PickupActor = World->SpawnActor<APickup>(PickUpItemClasses[Selection], Location, GetActorRotation());
+		const int32 Selection = FMath::RandRange(1, PickUpItemClasses.Num());
 
-		PickupActor->SetItemID(TEXT("Weapon01"));*/
+		AItemWeapon* PickupActor = NewObject<AItemWeapon>();
+		PickupActor = World->SpawnActor<AItemWeapon>(Location, GetActorRotation());
 
-		AItemArmor* PickupActor = NewObject<AItemArmor>();
-		PickupActor = World->SpawnActor<AItemArmor>(Location, GetActorRotation());
-
-		PickupActor->SetItemID(TEXT("Armor"));
+		//PickupActor->SetItemID(TEXT("Weapon0{Selection}"));
+		PickupActor->SetItemID(FString::Printf(TEXT("Weapon0%d"), Selection));
 		PickupActor->InitializePickup(UItemBase::StaticClass(), 1);
 	}
+	
 }
 
 void ABreakableActor::BeginPlay()

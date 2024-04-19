@@ -57,7 +57,7 @@ void AAIMinion::NormalAttack()
 #if ENABLE_DRAW_DEBUG
 
 	// 구를 그린다.
-	FColor	DrawColor = IsCollision ? FColor::Red : FColor::Green;
+	//FColor	DrawColor = IsCollision ? FColor::Red : FColor::Green;
 
 	/*DrawDebugCapsule(GetWorld(), (StartLocation + EndLocation) / 2.f,
 		75.f, 50.f, FRotationMatrix::MakeFromZ(GetActorForwardVector()).ToQuat(),

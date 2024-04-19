@@ -17,6 +17,14 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	UCapsuleComponent* Capsule;
 
+protected:
+
+	UPROPERTY(EditAnywhere, Category = "Breakable Properties")
+	TArray<TSubclassOf<class ATreasureActor>> TreasureClasses;
+
+	UPROPERTY(EditAnywhere, Category = "Item Properties")
+	TArray<TSubclassOf<class APickup>> PickUpItemClasses;
+
 public:	
 	ABreakableActor();
 
@@ -31,13 +39,6 @@ protected:
 
 public:	
 	virtual void Tick(float DeltaTime) override;
-
-private:
-	UPROPERTY(EditAnywhere, Category = "Breakable Properties")
-	TArray<TSubclassOf<class ATreasureActor>> TreasureClasses;
-
-	UPROPERTY(EditAnywhere, Category = "Item Properties")
-	TArray<TSubclassOf<class APickup>> PickUpItemClasses;
 
 	bool bBroken = false;
 

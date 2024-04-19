@@ -45,11 +45,11 @@ void UBTService_DetectTarget::TickNode(UBehaviorTreeComponent& OwnerComp, uint8*
 #if ENABLE_DRAW_DEBUG
 
 	// 구를 그린다.
-	FColor	DrawColor = IsCollision ? FColor::Red : FColor::Green;
+	/*FColor	DrawColor = IsCollision ? FColor::Red : FColor::Green;
 
 	DrawDebugSphere(GetWorld(), AILocation, 
 		AIState->mInteractionDistance, 20, DrawColor, false,
-		0.35f);
+		0.35f);*/
 
 #endif
 
