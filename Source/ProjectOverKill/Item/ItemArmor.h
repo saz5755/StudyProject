@@ -1,11 +1,10 @@
 #pragma once
 
-#include "CoreMinimal.h"
-#include "Item/ItemActor.h"
+#include "../Inventory/World/Pickup.h"
 #include "ItemArmor.generated.h"
 
 UCLASS()
-class PROJECTOVERKILL_API AItemArmor : public AItemActor
+class PROJECTOVERKILL_API AItemArmor : public APickup
 {
 	GENERATED_BODY()
 
@@ -22,5 +21,6 @@ public:
 	void SetMesh(USkeletalMesh* Mesh);
 	void SetMesh(const FString& Path);
 
-	
+	static FLinearColor SetItemArmorColor();
+
 };

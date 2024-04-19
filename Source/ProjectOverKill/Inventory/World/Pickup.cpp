@@ -4,6 +4,7 @@
 #include "Player/MainPlayerController.h"
 #include "Item/ItemManager.h"
 #include "Item/ItemWeapon.h"
+#include "Item/ItemArmor.h"
 
 APickup::APickup()
 {
@@ -60,7 +61,7 @@ void APickup::InitializePickup(const TSubclassOf<UItemBase> BaseClass, const int
 		switch (ItemReference->ItemType)
 		{
 		case EItemType::Armor:
-			EmbersEffect->SetColorParameter(TEXT("Color"), FLinearColor(20.f, 100.f, 100.f, 1.f));
+			EmbersEffect->SetColorParameter(TEXT("Color"), AItemArmor::SetItemArmorColor());
 			break;
 		case EItemType::Weapon:
 			EmbersEffect->SetColorParameter(TEXT("Color"), AItemWeapon::SetItemWeaponColor());
