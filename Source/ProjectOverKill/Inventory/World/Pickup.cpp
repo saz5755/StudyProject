@@ -3,7 +3,7 @@
 #include "Components/InventoryComponent.h"
 #include "Player/MainPlayerController.h"
 #include "Item/ItemManager.h"
-#include "Item/PickupItemWeapon.h"
+#include "Item/ItemWeapon.h"
 
 APickup::APickup()
 {
@@ -63,7 +63,7 @@ void APickup::InitializePickup(const TSubclassOf<UItemBase> BaseClass, const int
 			EmbersEffect->SetColorParameter(TEXT("Color"), FLinearColor(20.f, 100.f, 100.f, 1.f));
 			break;
 		case EItemType::Weapon:
-			EmbersEffect->SetColorParameter(TEXT("Color"), APickupItemWeapon::SetItemWeaponColor());
+			EmbersEffect->SetColorParameter(TEXT("Color"), AItemWeapon::SetItemWeaponColor());
 			break;
 		case EItemType::Shield:
 			break;
