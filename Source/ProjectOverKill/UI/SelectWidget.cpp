@@ -32,6 +32,6 @@ void USelectWidget::StartButtonClick()
 	FString	Option = FString::Printf(TEXT("Type=%d?InputName=%s"),
 		(int32)Type, *Name);
 
-	UGameplayStatics::OpenLevel(GetWorld(), TEXT("Main"), true,
+	UGameplayStatics::OpenLevel(GetWorld(), TEXT("MainForest"), true,
 		Option);
 }
