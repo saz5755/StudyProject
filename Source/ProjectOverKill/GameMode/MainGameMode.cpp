@@ -12,6 +12,7 @@
 
 AMainGameMode::AMainGameMode()
 {
+
 	PlayerStateClass = APOKPlayerState::StaticClass();
 	DefaultPawnClass = ASoulKnightCharacter::StaticClass();
 	PlayerControllerClass = AMainPlayerController::StaticClass();
@@ -24,15 +25,20 @@ void AMainGameMode::InitGame(const FString& MapName, const FString& Options,
 {
 	Super::InitGame(MapName, Options, ErrorMessage);
 
-	/*EPlayerType	PlayerType = GetWorld()->GetGameInstance<UKDT1GameInstance>()->GetPlayerType();
+	EPlayerType	PlayerType = GetWorld()->GetGameInstance<UPOKGameInstance>()->GetPlayerType();
 
-	switch (PlayerType)
+	/*switch (PlayerType)
 	{
 	case EPlayerType::Knight:
 		DefaultPawnClass = AKnightCharacter::StaticClass();
 		break;
+
 	case EPlayerType::Gunner:
 		DefaultPawnClass = AGunnerCharacter::StaticClass();
+		break;
+
+	case EPlayerType::SoulKnight:
+		DefaultPawnClass = ASoulKnightCharacter::StaticClass();
 		break;
 	}*/
 }
