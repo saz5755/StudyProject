@@ -44,7 +44,10 @@ protected:
 	UImage* ItemIcon;
 
 	UPROPERTY(VisibleAnywhere, Category = "Inventory Slot") 
-	UTextBlock* ItemQuantity;	
+	UTextBlock* ItemQuantity;
+
+	UPROPERTY(VisibleAnywhere, Category = "Inventory Slot") 
+	UInventoryItemSlot* Data;
 
 	UPROPERTY()
 	AMainPlayerController* PlayerController;

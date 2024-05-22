@@ -11,7 +11,7 @@
 
 void UInventoryItemSlot::SetItem(UObject* ItemData)
 {
-    UInventoryItemSlot* Data = Cast<UInventoryItemSlot>(ItemData);
+    Data = Cast<UInventoryItemSlot>(ItemData);
 
     // Tooltip 
     if (Data)
@@ -95,19 +95,38 @@ void UInventoryItemSlot::NativeOnDragDetected(const FGeometry& InGeometry, const
     { 
         const TObjectPtr<UDragItemVisual> DragVisual = CreateWidget<UDragItemVisual>(this, DragItemVisualClass);
 
-        DragVisual->ItemIcon->SetBrushFromTexture(ItemReference->AssetData.Icon);
-        DragVisual->ItemBorder->SetBrushColor(ItemBorder->GetBrushColor());
-        DragVisual->ItemQuantity->SetText(FText::AsNumber(ItemReference->Quantity));
+        DragVisual->ItemIcon->SetBrushFromTexture(Data->GetItemReference()->AssetData.Icon);
 
-        ItemReference->NumericData.bIsStackable
-            ? DragVisual->ItemQuantity->SetText(FText::AsNumber(ItemReference->Quantity))
+        if (Data)
+        {
+            switch (Data->GetItemReference()->ItemQuality)
+            {
+            case EItemQuality::Shoddy:
+                DragVisual->ItemBorder->SetBrushColor(FLinearColor::Gray);
+                break;
+            case EItemQuality::Common:
+                DragVisual->ItemBorder->SetBrushColor(FLinearColor::White);
+                break;
+            case EItemQuality::Quality:
+                DragVisual->ItemBorder->SetBrushColor(FLinearColor(0.0f, 0.51f, 0.169f));
+                break;
+            case EItemQuality::Masterwork:
+                DragVisual->ItemBorder->SetBrushColor(FLinearColor(0.0f, 0.4f, 0.75f));
+                break;
+            case EItemQuality::Grandmaster:
+                DragVisual->ItemBorder->SetBrushColor(FLinearColor(100.0f, 65.0f, 0.0f, 1.0f));
+                break;
+            }
+        }
+        DragVisual->ItemQuantity->SetText(FText::AsNumber(Data->GetItemReference()->Quantity));
+
+        Data->GetItemReference()->NumericData.bIsStackable
+            ? DragVisual->ItemQuantity->SetText(FText::AsNumber(Data->GetItemReference()->Quantity))
             : DragVisual->ItemQuantity->SetVisibility(ESlateVisibility::Collapsed);
 
-        DragVisual->ItemQuantity->SetText(FText::AsNumber(ItemReference->Quantity));
-
         UItemDragDropOperation* DragItemOperation = NewObject<UItemDragDropOperation>();
-        DragItemOperation->SourceItem = ItemReference;
-        DragItemOperation->SourceInventory = ItemReference->OwningInventory;
+        DragItemOperation->SourceItem = Data->GetItemReference();
+        DragItemOperation->SourceInventory = Data->GetItemReference()->OwningInventory;
 
         DragItemOperation->DefaultDragVisual = DragVisual;
         DragItemOperation->Pivot = EDragPivot::TopLeft;
