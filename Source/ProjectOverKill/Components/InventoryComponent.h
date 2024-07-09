@@ -121,7 +121,6 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Inventory")
 	TArray<TObjectPtr<UItemBase>> InventoryContents;
 	
-	// protected function
 	virtual void BeginPlay() override;
 
 	FItemAddResult HandleNonStackableItems(UItemBase* InputItem);
@@ -130,6 +129,5 @@ protected:
 	int32 CalculateNumberForFullStack(UItemBase* StackableItem, int32 InitialRequestedAddAmount);
 
 	void AddNewItem(UItemBase* Item, const int32 AmountToAdd);
-
 
 };

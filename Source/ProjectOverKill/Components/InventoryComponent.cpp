@@ -12,8 +12,6 @@ UInventoryComponent::UInventoryComponent()
 void UInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
-
 }
 
 UItemBase* UInventoryComponent::FindMatchingItem(UItemBase* ItemIn) const

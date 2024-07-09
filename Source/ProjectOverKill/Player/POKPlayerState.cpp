@@ -38,6 +38,10 @@ void APOKPlayerState::BeginPlay()
 	AMainPlayerController* Controller =
 		GetWorld()->GetFirstPlayerController<AMainPlayerController>();
 
-	Controller->GetMainWidget()->SetHP(mHP, mHPMax);
-	Controller->GetMainWidget()->SetMP(mMP, mMPMax);
+	if (!Controller)
+	{
+		Controller->GetMainWidget()->SetHP(mHP, mHPMax);
+		Controller->GetMainWidget()->SetMP(mMP, mMPMax);
+	}
+
 }

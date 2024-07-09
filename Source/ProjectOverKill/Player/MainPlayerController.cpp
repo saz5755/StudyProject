@@ -39,9 +39,13 @@ void AMainPlayerController::BeginPlay()
 
 	bShowMouseCursor = true;
 
-	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-	const UMainInputDataConfig* MainInputDataConfig = GetDefault<UMainInputDataConfig>();
-	Subsystem->AddMappingContext(MainInputDataConfig->DefaultContext, 0);
+	if (IsLocalController())
+	{
+		UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
+		const UMainInputDataConfig* MainInputDataConfig = GetDefault<UMainInputDataConfig>();
+	
+		Subsystem->AddMappingContext(MainInputDataConfig->DefaultContext, 0);
+	}
 
 	// 위젯을 생성한다.
 	mMainWidget = CreateWidget<UMainViewportWidget>(GetWorld(), mMainWidgetClass);
